@@ -57,6 +57,15 @@ void	ft_draw_map(char **map, int y, t_program *mlx)
 	}
 }
 
+static char	*ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
+{
+	ft_check_chars(map_read);
+	*map = ft_strjoin(*map, map_read);
+	map_read = get_next_line(fd);
+	mlx->img.winy++;
+	return (map_read);
+}
+
 char	**ft_check_map(char *map, t_program *mlx)
 {
 	char	*map_read;
@@ -73,15 +82,15 @@ char	**ft_check_map(char *map, t_program *mlx)
 		map_read = get_next_line(fd);
 		map = "\0";
 		while (map_read)
-		{
-			ft_check_chars(map_read);
-			map = ft_strjoin(map, map_read);
-			map_read = get_next_line(fd);
-			mlx->img.winy++;
-		}
+			map_read = ft_reading_map(map_read, &map, fd, mlx);
 		while (map[mlx->img.winx] != '\n')
 			mlx->img.winx++;
 		map_done = ft_split(map, '\n');
+		if (mlx->img.winx <= mlx->img.winy)
+		{
+			perror("Map error: Map must be rectangular.");
+			exit(0);
+		}
 	}
 	else
 		perror("File error: Illegal extension.");
