@@ -1,22 +1,5 @@
 #include "so_long.h"
 
-static void	ft_check_chars(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!(str[i] == '1' || str[i] == '0' || str[i] == 'C' || str[i] == 'E'
-			|| str[i] == 'P' || str[i] == 'B' || str[i] == '\n'))
-		{
-			perror("Error\nIllegal char in map");
-			exit(0);
-		}
-		i++;
-	}
-}
-
 static int	ft_check_ber(char *map)
 {
 	int	i;
@@ -43,16 +26,51 @@ static int	ft_check_ber(char *map)
 	}
 }
 
+static void	ft_check_chars(char *str, int *c, int *e, int *p)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 'C')
+			(*c)++;
+		if (str[i] == 'E')
+			(*e)++;
+		if (str[i] == 'P')
+			(*p)++;
+		if (!(str[i] == '1' || str[i] == '0' || str[i] == 'C' || str[i] == 'E'
+			|| str[i] == 'P' || str[i] == '\n'))
+		{
+			perror("Error\nIllegal char in map");
+			exit(0);
+		}
+		i++;
+	}
+}
+
 static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
 {
+	static int	c;
+	int	e;
+	int	p;
+
+	c = 0;
+	e = 0;
+	p = 0;
 	map_read = get_next_line(fd);
 	*map = "\0";
 	while (map_read)
 	{
-		ft_check_chars(map_read);
+		ft_check_chars(map_read, &c, &e, &p);
 		*map = ft_strjoin(*map, map_read);
 		map_read = get_next_line(fd);
 		mlx->img.winy++;
+	}
+	if ((c < 1) || (e < 1) || (p < 1))
+	{
+		perror("Error\nMissing exit, object or initial position");
+		exit(0);
 	}
 }
 
