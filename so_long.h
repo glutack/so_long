@@ -19,6 +19,8 @@ typedef struct	s_img {
 	void	*wall;
 	void	*selene;
 	void	*path;
+	void	*exit;
+	void	*object;
 }				t_img;
 
 typedef struct	s_program {
