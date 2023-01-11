@@ -17,15 +17,14 @@ all: $(NAME)
 
 $(LIBFT):
 	@make -C libft
-	@echo "Libft creado :D"
 
 $(LIBMLX):
 	@make -C minilibx-linux
-	@echo "MLX creado :D"
 
 #For object files, you could add the following rule to your makefile, assuming that you have the mlx for linux source in a directory named mlx_linux in the root of your project:#
 %.o: %.c
 	@gcc $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@echo "Objetos creados :D"
 
 #To link with the required internal Linux API:#
 $(NAME): $(OBJ) $(LIBMLX) $(LIBFT)
@@ -38,10 +37,9 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "Juego eliminado :D
+	@echo "Juego eliminado :D"
 
 re: fclean all
-	@echo ":D"
 
 libclean:
 	@make -C ./minilibx-linux clean

@@ -9,7 +9,10 @@ static void	ft_check_chars(char *str)
 	{
 		if (!(str[i] == '1' || str[i] == '0' || str[i] == 'C' || str[i] == 'E'
 			|| str[i] == 'P' || str[i] == 'B' || str[i] == '\n'))
-			perror("Map error: Illegal char.");
+		{
+			perror("Error\nIllegal char in map");
+			exit(0);
+		}
 		i++;
 	}
 }
@@ -33,37 +36,52 @@ static int	ft_check_ber(char *map)
 			}
 		}
 	}
-	return (0);
-}
-
-void	ft_draw_map(char **map, int y, t_program *mlx)
-{
-	mlx->img.y = 0;
-	mlx->img.x = 0;
-	while ((mlx->img.y) < y)
+	else
 	{
-		while (map[mlx->img.y][mlx->img.x] != '\0')
-		{
-			if (map[mlx->img.y][mlx->img.x] == '1')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == '0')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == 'C' || map[mlx->img.y][mlx->img.x] == 'E' || map[mlx->img.y][mlx->img.x] == 'P')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, mlx->img.x * 80, mlx->img.y * 80);
-			mlx->img.x++;
-		}
-		mlx->img.y++;
-		mlx->img.x = 0;
+		perror("Error\nIllegal extension");
+		return (0);
 	}
 }
 
-static char	*ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
+static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
 {
-	ft_check_chars(map_read);
-	*map = ft_strjoin(*map, map_read);
 	map_read = get_next_line(fd);
-	mlx->img.winy++;
-	return (map_read);
+	*map = "\0";
+	while (map_read)
+	{
+		ft_check_chars(map_read);
+		*map = ft_strjoin(*map, map_read);
+		map_read = get_next_line(fd);
+		mlx->img.winy++;
+	}
+}
+
+static void ft_wall_check(char **map, t_program *mlx)
+{
+	mlx->img.x = (mlx->img.winx - 1);
+	mlx->img.y = (mlx->img.winy - 1);
+	while (mlx->img.x >= 0)
+	{	
+		if ((map[mlx->img.y][mlx->img.x] != '1') || (map[0][mlx->img.x] != '1'))
+		{
+			perror("Error\nMap is not closed");
+			exit(0);
+		}
+		else
+			mlx->img.x--;
+	}
+	mlx->img.x = (mlx->img.winx - 1);
+	mlx->img.y--;
+	while (mlx->img.y > 0)
+	{
+		if ((map[mlx->img.y][0] != '1') || (map[mlx->img.y][mlx->img.x] != '1'))
+		{
+			perror("Error\nMap is not closed");
+			exit(0);
+		}
+		else
+			mlx->img.y--;
+	}
 }
 
 char	**ft_check_map(char *map, t_program *mlx)
@@ -78,21 +96,17 @@ char	**ft_check_map(char *map, t_program *mlx)
 	{
 		fd = open(map, O_RDONLY);
 		if (!fd)
-			perror("Read error");
-		map_read = get_next_line(fd);
-		map = "\0";
-		while (map_read)
-			map_read = ft_reading_map(map_read, &map, fd, mlx);
+			perror("Error\nRead error");
+		ft_reading_map(map_read, &map, fd, mlx);
 		while (map[mlx->img.winx] != '\n')
 			mlx->img.winx++;
-		map_done = ft_split(map, '\n');
 		if (mlx->img.winx <= mlx->img.winy)
 		{
-			perror("Map error: Map must be rectangular.");
+			perror("Error\nMap must be rectangular");
 			exit(0);
 		}
+		map_done = ft_split(map, '\n');
+		ft_wall_check(map_done, mlx);
 	}
-	else
-		perror("File error: Illegal extension.");
 	return (map_done);
 }
