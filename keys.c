@@ -25,11 +25,11 @@ int	ft_keys(int keycode, void *program)
 		if (keycode == 119)
 			ft_move_up(program);
 		else if (keycode == 97)
-			printf("a");
+			ft_move_left(program);
 		else if (keycode == 115)
 			ft_move_down(program);
 		else if (keycode == 100)
-			printf("d");
+			ft_move_right(program);
 	}
 	return (0);
 }
