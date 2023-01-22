@@ -8,6 +8,8 @@ void	ft_img_handler(t_program *mlx)
 	(*mlx).img.path = mlx_xpm_file_to_image((*mlx).mlx, "./assets/path.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.exit = mlx_xpm_file_to_image((*mlx).mlx, "./assets/exit.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.object = mlx_xpm_file_to_image((*mlx).mlx, "./assets/object.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.selenel = mlx_xpm_file_to_image((*mlx).mlx, "./assets/selenel.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.selener = mlx_xpm_file_to_image((*mlx).mlx, "./assets/selener.xpm", &((*mlx).img.width), &((*mlx).img.height));
 }
 
 void ft_img_eraser(t_program *mlx)
@@ -17,6 +19,9 @@ void ft_img_eraser(t_program *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img.path);
 	mlx_destroy_image(mlx->mlx, mlx->img.exit);
 	mlx_destroy_image(mlx->mlx, mlx->img.object);
+	mlx_destroy_image(mlx->mlx, mlx->img.selener);
+	mlx_destroy_image(mlx->mlx, mlx->img.selenel);
+
 }
 
 void	ft_draw_map(char **map, int y, t_program *mlx)
@@ -38,6 +43,7 @@ void	ft_draw_map(char **map, int y, t_program *mlx)
 			else if (map[mlx->img.y][mlx->img.x] == 'P')
 			{
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, mlx->img.x * 80, mlx->img.y * 80);
+				mlx->img.selenepos = 0;
 				mlx->py = mlx->img.y;
 				mlx->px = mlx->img.x;
 			}
@@ -51,19 +57,22 @@ void	ft_draw_map(char **map, int y, t_program *mlx)
 void	ft_redraw_map(int pathy, int pathx, int py, int px, t_program *mlx)
 {
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, pathx * 80, pathy * 80);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, px * 80, py * 80);
+	if (mlx->img.selenepos == 1)
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener, px * 80, py * 80);
+		mlx->img.selenepos = 0;
+	}
+	else if (mlx->img.selenepos == 0)
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel, px * 80, py * 80);
+		mlx->img.selenepos = 1;
+	}
 }
 
 void	ft_end_map(t_program *mlx)
 {
 	if (mlx->end == 1)
 	{
-		/*mlx->map_done[mlx->falsey][mlx->px] == 'P';
-		mlx->map_done[mlx->py][mlx->px] == '0';
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, pathx * 80, pathy * 80);
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, px * 80, py * 80);		
-		mlx->py--;
-		mlx->moves++;*/
 		while (mlx->img.y < mlx->img.winy)
 		{
 			while (mlx->map_done[mlx->img.y][mlx->img.x] != '\0')

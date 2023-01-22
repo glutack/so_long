@@ -18,6 +18,9 @@ typedef struct	s_img {
 	int		winx;
 	void	*wall;
 	void	*selene;
+	void	*selenel;
+	void	*selener;
+	int		selenepos;
 	void	*path;
 	void	*exit;
 	void	*object;
