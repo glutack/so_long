@@ -1,10 +1,10 @@
 #include "so_long.h"
 
-int	ft_close_win(void *program)
+int	ft_close_win(t_program *mlx)
 {
-	t_program	*mlx;
+	/*t_program	*mlx;
 
-	mlx = program;
+	mlx = program;*/
 	ft_img_eraser(mlx);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	free(mlx->mlx);
@@ -14,11 +14,23 @@ int	ft_close_win(void *program)
 
 int	ft_keys(int keycode, void *program)
 {
-	//t_program	*mlx;
-	
-	//mlx = program;
-	printf("%d", keycode);
+	t_program	*mlx;
+
+	mlx = program;
+	mlx_hook(mlx->win, 17, 0, ft_close_win, &mlx);
 	if (keycode == 65307)
-		ft_close_win(program);
+		ft_close_win(mlx);
+	else if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100)
+	{
+		if (keycode == 119)
+			ft_move_up(program);
+		else if (keycode == 97)
+			printf("a");
+		else if (keycode == 115)
+			ft_move_down(program);
+		else if (keycode == 100)
+			printf("d");
+	}
 	return (0);
 }
+

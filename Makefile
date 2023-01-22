@@ -1,6 +1,6 @@
 #---------- ----------#
 NAME	=	so_long
-SRC		=	main.c images.c keys.c map.c
+SRC		=	main.c images.c keys.c map.c moves.c
 OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#

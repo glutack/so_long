@@ -10,16 +10,17 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		t_program	mlx;
-		char	**map_done;
-	
+
+		mlx.map_done = ft_check_map(argv[1], &mlx);
 		mlx.mlx = mlx_init();
-		map_done = ft_check_map(argv[1], &mlx);
 		mlx.win = mlx_new_window(mlx.mlx, mlx.img.winx * 80, mlx.img.winy * 80, "Las aventuras de Selene");
+		mlx.moves = 0;
+		mlx.collected = 0;
+		mlx.end = 0;
 		ft_img_handler(&mlx);
-		ft_draw_map(map_done, mlx.img.winy, &mlx);
-		mlx_hook(mlx.win, 17, 0, ft_close_win, &mlx);
+		ft_draw_map(mlx.map_done, mlx.img.winy, &mlx);
 		mlx_key_hook(mlx.win, ft_keys, &mlx);
-		//mlx_key_hook(mlx.win, ft_close_win, 27);
+		printf("moves -> %d\n", mlx.moves);
 		mlx_loop(mlx.mlx);
 	}
 	else

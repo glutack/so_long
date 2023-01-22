@@ -26,6 +26,16 @@ typedef struct	s_img {
 typedef struct	s_program {
 	void	*mlx;
 	void	*win;
+	char	**p;
+	char	**map_done;
+	int		py;
+	int		px;
+	int		falsey;
+	int		falsex;
+	int		moves;
+	int		collected;
+	int		to_collect;
+	int		end;
 
 	t_img	img;
 }				t_program;
@@ -33,14 +43,19 @@ typedef struct	s_program {
 //image related
 void	ft_img_handler(t_program *mlx);
 void	ft_img_eraser(t_program *mlx);
+void	ft_redraw_map(int pathy, int pathx, int py, int px, t_program *mlx);
+
 
 //keys
 //esc = 65307 | a = 97 | w = 119 | s = 115 | d = 100|
-int		ft_close_win(void *program);
+int		ft_close_win(t_program *mlx);
 int		ft_keys(int key, void *program);
+void	ft_move_up(t_program *mlx);
+void	ft_move_down(t_program *mlx);
+
 
 //map
 char	**ft_check_map(char *map, t_program *mlx);
 void	ft_draw_map(char **map, int y, t_program *mlx);
-
+void	ft_end_map(t_program *mlx);
 #endif

@@ -26,7 +26,7 @@ static int	ft_check_ber(char *map)
 	}
 }
 
-static void	ft_check_chars(char *str, int *c, int *e, int *p)
+static void	ft_check_chars(char *str, int c, int *e, int *p, t_program *mlx)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ static void	ft_check_chars(char *str, int *c, int *e, int *p)
 	while (str[i])
 	{
 		if (str[i] == 'C')
-			(*c)++;
+			mlx->to_collect++;
 		if (str[i] == 'E')
 			(*e)++;
 		if (str[i] == 'P')
@@ -51,23 +51,22 @@ static void	ft_check_chars(char *str, int *c, int *e, int *p)
 
 static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
 {
-	static int	c;
 	int	e;
 	int	p;
 
-	c = 0;
+	mlx->to_collect = 0;
 	e = 0;
 	p = 0;
 	map_read = get_next_line(fd);
 	*map = "\0";
 	while (map_read)
 	{
-		ft_check_chars(map_read, &c, &e, &p);
+		ft_check_chars(map_read, mlx->to_collect, &e, &p, mlx);
 		*map = ft_strjoin(*map, map_read);
 		map_read = get_next_line(fd);
 		mlx->img.winy++;
 	}
-	if ((c < 1) || (e < 1) || (p < 1))
+	if ((mlx->to_collect < 1) || (e < 1) || (p < 1) || (p > 1))
 	{
 		perror("Error\nMissing exit, object or initial position");
 		exit(0);
@@ -126,5 +125,6 @@ char	**ft_check_map(char *map, t_program *mlx)
 		map_done = ft_split(map, '\n');
 		ft_wall_check(map_done, mlx);
 	}
+	close(fd);
 	return (map_done);
 }
