@@ -24,6 +24,7 @@ static int	ft_check_ber(char *map)
 		perror("Error\nIllegal extension");
 		return (0);
 	}
+	return (0);
 }
 
 static void	ft_check_chars(char *str, int c, int *e, int *p, t_program *mlx)
@@ -40,7 +41,7 @@ static void	ft_check_chars(char *str, int c, int *e, int *p, t_program *mlx)
 		if (str[i] == 'P')
 			(*p)++;
 		if (!(str[i] == '1' || str[i] == '0' || str[i] == 'C' || str[i] == 'E'
-			|| str[i] == 'P' || str[i] == '\n'))
+				|| str[i] == 'P' || str[i] == '\n'))
 		{
 			perror("Error\nIllegal char in map");
 			exit(0);
