@@ -2,16 +2,9 @@
 
 int	ft_close_win(t_program *mlx)
 {
-	/*t_program	*mlx;
-
-	mlx = program;*/
-	write(1, "a", 1);
 	ft_img_eraser(mlx);
-	write(1, "b", 1);
 	mlx_destroy_window(mlx->mlx, mlx->win);
-	write(1, "c", 1);
 	free(mlx->mlx);
-	write(1, "d", 1);
 	exit(0);
 	return (0);
 }

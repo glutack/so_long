@@ -4,12 +4,18 @@
 void	ft_img_handler(t_program *mlx)
 {
 	(*mlx).img.wall = mlx_xpm_file_to_image((*mlx).mlx, "./assets/wall.xpm", &((*mlx).img.width), &((*mlx).img.height));
-	(*mlx).img.selene = mlx_xpm_file_to_image((*mlx).mlx, "./assets/selene.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.path = mlx_xpm_file_to_image((*mlx).mlx, "./assets/path.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.exit = mlx_xpm_file_to_image((*mlx).mlx, "./assets/exit.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.object = mlx_xpm_file_to_image((*mlx).mlx, "./assets/object.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.selene = mlx_xpm_file_to_image((*mlx).mlx, "./assets/selene.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.selenel = mlx_xpm_file_to_image((*mlx).mlx, "./assets/selenel.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.selener = mlx_xpm_file_to_image((*mlx).mlx, "./assets/selener.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.paulinol1 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinol1.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.paulinol2 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinol2.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.paulinol3 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinol3.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.paulinor1 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinor1.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.paulinor2 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinor2.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.paulinor3 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinor3.xpm", &((*mlx).img.width), &((*mlx).img.height));
 }
 
 void ft_img_eraser(t_program *mlx)
@@ -21,6 +27,12 @@ void ft_img_eraser(t_program *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img.object);
 	mlx_destroy_image(mlx->mlx, mlx->img.selener);
 	mlx_destroy_image(mlx->mlx, mlx->img.selenel);
+	mlx_destroy_image(mlx->mlx, mlx->img.paulinol1);
+	mlx_destroy_image(mlx->mlx, mlx->img.paulinol2);
+	mlx_destroy_image(mlx->mlx, mlx->img.paulinol3);
+	mlx_destroy_image(mlx->mlx, mlx->img.paulinor1);
+	mlx_destroy_image(mlx->mlx, mlx->img.paulinor2);
+	mlx_destroy_image(mlx->mlx, mlx->img.paulinor3);
 
 }
 
@@ -40,6 +52,8 @@ void	ft_draw_map(char **map, int y, t_program *mlx)
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.object, mlx->img.x * 80, mlx->img.y * 80);
 			else if (map[mlx->img.y][mlx->img.x] == 'E')
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.exit, mlx->img.x * 80, mlx->img.y * 80);
+			else if (map[mlx->img.y][mlx->img.x] == 'B')
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.paulinor1, mlx->img.x * 80, mlx->img.y * 80);
 			else if (map[mlx->img.y][mlx->img.x] == 'P')
 			{
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, mlx->img.x * 80, mlx->img.y * 80);

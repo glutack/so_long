@@ -24,6 +24,12 @@ typedef struct	s_img {
 	void	*path;
 	void	*exit;
 	void	*object;
+	void	*paulinor1;
+	void	*paulinor2;
+	void	*paulinor3;
+	void	*paulinol1;
+	void	*paulinol2;
+	void	*paulinol3;
 }				t_img;
 
 typedef struct	s_program {
