@@ -9,7 +9,7 @@
 # include <unistd.h> // read, close
 
 //structs
-typedef struct	s_img {
+typedef struct s_img {
 	int		width;
 	int		height;
 
@@ -29,7 +29,7 @@ typedef struct	s_img {
 	void	*paulinol3;
 }				t_img;
 
-typedef	struct	s_map {
+typedef struct s_map {
 	int		winy;
 	int		winx;
 	int		py;
@@ -40,12 +40,12 @@ typedef	struct	s_map {
 
 }				t_map;
 
-typedef	struct	s_player {
+typedef struct s_player {
 	int		won;
 	int		dead;
 }				t_player;
 
-typedef struct	s_program {
+typedef struct s_program {
 	void		*mlx;
 	void		*win;
 	char		**p;
@@ -69,6 +69,7 @@ typedef struct	s_program {
 //image related
 void	ft_img_handler(t_program *mlx);
 void	ft_img_eraser(t_program *mlx);
+void	ft_draw_map(char **map, int y, t_program *mlx);
 void	ft_redraw_map(int py, int px, t_program *mlx);
 
 //error
@@ -85,10 +86,11 @@ void	ft_move_down(t_program *mlx);
 void	ft_move_left(t_program *mlx);
 void	ft_move_right(t_program *mlx);
 
-
 //map
-void	ft_check_map(char *map, t_program *mlx);
-char	ft_path_check(char **map, int y, int x, t_program *mlx);
-void	ft_draw_map(char **map, int y, t_program *mlx);
+char	**ft_check_map(char *map, t_program *mlx);
+char	ft_check_path(char **map, int y, int x, t_program *mlx);
 void	ft_end_map(t_program *mlx);
+
+//other
+void	ft_init_var(t_program *mlx);
 #endif

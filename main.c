@@ -29,20 +29,29 @@ int	ft_check_ber(char *map)
 	return (0);
 }
 
-static void	ft_var_init(t_program *mlx)
+void	ft_init_var(t_program *mlx)
 {
 	mlx->moves = 0;
 	mlx->collected = 0;
 	mlx->end = 0;
+	mlx->y = 0;
+	mlx->x = 0;
 }
 
-int	main(int argc, char **argv)
+static void	ft_init_game(t_program *mlx)
 {
+	ft_init_var(mlx);
+	ft_img_handler(mlx);
+	ft_draw_map(mlx->map_done, mlx->map.winy, mlx);
+}
+
+void	main(int argc, char **argv)
+{
+	t_program	mlx;
+
 	if (argc == 2)
 	{
-		t_program	mlx;
-
-		ft_check_map(argv[1], &mlx);
+		mlx.map_done = ft_check_map(argv[1], &mlx);
 		if (!mlx.map_done)
 			ft_perror("Error\nCould not load map");
 		mlx.mlx = mlx_init();
@@ -51,18 +60,18 @@ int	main(int argc, char **argv)
 			ft_perror("Error\nCould not initialize MLX");
 			free(mlx.map_done);
 		}
-		mlx.win = mlx_new_window(mlx.mlx, mlx.map.winx * 80, mlx.map.winy * 80, "Las aventuras de Selene");
-		ft_var_init(&mlx);
-		ft_img_handler(&mlx);
-		ft_draw_map(mlx.map_done, mlx.map.winy, &mlx);
+		mlx.win = mlx_new_window(mlx.mlx, mlx.map.winx * 80, mlx.map.winy * 80,
+				"Las aventuras de Selene");
+		ft_init_game(&mlx);
 		mlx_hook(mlx.win, 17, 0, ft_close_win, &mlx);
 		mlx_key_hook(mlx.win, ft_keys, &mlx);
 		//mlx_loop_hook(mlx.mlx, ft_animation, &mlx);
 		mlx_loop(mlx.mlx);
 	}
 	else
-		return (0);
+		ft_perror("Error\nIncorrect number of arguments");
 }
+
 
 //bonus
 /*mlx_string_put para contador

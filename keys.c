@@ -15,7 +15,6 @@ int	ft_keys(int keycode, void *program)
 	t_program	*mlx;
 
 	mlx = program;
-	mlx_hook(mlx->win, 17, 0, ft_close_win, &mlx);
 	if (keycode == 65307 || keycode == 53)
 		ft_close_win(mlx);
 	else if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)

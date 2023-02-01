@@ -7,13 +7,13 @@ void	ft_move_up(t_program *mlx)
 	{
 		if (mlx->collected == mlx->to_collect)
 		{
+			ft_init_var(mlx);
 			mlx->end = 1;
-			mlx->y = 0;
-			mlx->x = 0;
 			ft_end_map(mlx);
 		}
 	}
-	if (mlx->map_done[mlx->falseyx][mlx->map.px] == '0' || mlx->map_done[mlx->falseyx][mlx->map.px] == 'C')
+	if (mlx->map_done[mlx->falseyx][mlx->map.px] == '0' ||
+		mlx->map_done[mlx->falseyx][mlx->map.px] == 'C')
 	{
 		if (mlx->map_done[mlx->falseyx][mlx->map.px] == 'C')
 			mlx->collected++;
@@ -34,13 +34,13 @@ void	ft_move_down(t_program *mlx)
 	{
 		if (mlx->collected == mlx->to_collect)
 		{
+			ft_init_var(mlx);
 			mlx->end = 1;
-			mlx->y = 0;
-			mlx->x = 0;
 			ft_end_map(mlx);
 		}
 	}
-	if (mlx->map_done[mlx->falseyx][mlx->map.px] == '0' || mlx->map_done[mlx->falseyx][mlx->map.px] == 'C')
+	if (mlx->map_done[mlx->falseyx][mlx->map.px] == '0' ||
+		mlx->map_done[mlx->falseyx][mlx->map.px] == 'C')
 	{
 		if (mlx->map_done[mlx->falseyx][mlx->map.px] == 'C')
 			mlx->collected++;
@@ -61,13 +61,13 @@ void	ft_move_left(t_program *mlx)
 	{
 		if (mlx->collected == mlx->to_collect)
 		{
+			ft_init_var(mlx);
 			mlx->end = 1;
-			mlx->y = 0;
-			mlx->x = 0;
 			ft_end_map(mlx);
 		}
 	}
-	if (mlx->map_done[mlx->map.py][mlx->falseyx] == '0' || mlx->map_done[mlx->map.py][mlx->falseyx] == 'C')
+	if (mlx->map_done[mlx->map.py][mlx->falseyx] == '0' ||
+		mlx->map_done[mlx->map.py][mlx->falseyx] == 'C')
 	{
 		if (mlx->map_done[mlx->map.py][mlx->falseyx] == 'C')
 			mlx->collected++;
@@ -88,13 +88,13 @@ void	ft_move_right(t_program *mlx)
 	{
 		if (mlx->collected == mlx->to_collect)
 		{
+			ft_init_var(mlx);
 			mlx->end = 1;
-			mlx->y = 0;
-			mlx->x = 0;
 			ft_end_map(mlx);
 		}
 	}
-	if (mlx->map_done[mlx->map.py][mlx->falseyx] == '0' || mlx->map_done[mlx->map.py][mlx->falseyx] == 'C')
+	if (mlx->map_done[mlx->map.py][mlx->falseyx] == '0' ||
+		mlx->map_done[mlx->map.py][mlx->falseyx] == 'C')
 	{
 		if (mlx->map_done[mlx->map.py][mlx->falseyx] == 'C')
 			mlx->collected++;

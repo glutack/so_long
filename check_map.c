@@ -20,7 +20,52 @@ static void	ft_check_chars(char *str, int c, int *e, int *p, t_program *mlx)
 	}
 }
 
-static void ft_wall_check(char **map, t_program *mlx)
+static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
+{
+	int	e;
+	int	p;
+
+	e = 0;
+	p = 0;
+	mlx->to_collect = 0;
+	map_read = get_next_line(fd);
+	*map = "\0";
+	while (map_read)
+	{
+		ft_check_chars(map_read, mlx->to_collect, &e, &p, mlx);
+		*map = ft_strjoin(*map, map_read);
+		map_read = get_next_line(fd);
+		mlx->map.winy++;
+	}
+	if ((mlx->to_collect < 1) || !(e == 1) || !(p == 1))
+		ft_perror("Error\nToo many or missing components");
+}
+
+static void	ft_get_positions(char **map, int y, t_program *mlx)
+{
+	ft_init_var(mlx);
+	while ((mlx->y) < y)
+	{
+		while (map[mlx->y][mlx->x] != '\0')
+		{
+			if (map[mlx->y][mlx->x] == 'E')
+			{
+				mlx->map.ey = mlx->y;
+				mlx->map.ex = mlx->x;
+			}
+			else if (map[mlx->y][mlx->x] == 'P')
+			{
+				mlx->map.py = mlx->y;
+				mlx->map.px = mlx->x;
+			}
+			mlx->x++;
+		}
+		mlx->y++;
+		mlx->x = 0;
+	}
+}
+
+static void	ft_check_wall(char **map, t_program *mlx)
 {
 	mlx->x = (mlx->map.winx - 1);
 	mlx->y = (mlx->map.winy - 1);
@@ -40,56 +85,10 @@ static void ft_wall_check(char **map, t_program *mlx)
 		else
 			mlx->y--;
 	}
+	ft_get_positions(map, mlx->map.winy, mlx);
 }
 
-static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
-{
-	int	e;
-	int	p;
-
-	mlx->to_collect = 0;
-	e = 0;
-	p = 0;
-	map_read = get_next_line(fd);
-	*map = "\0";
-	while (map_read)
-	{
-		ft_check_chars(map_read, mlx->to_collect, &e, &p, mlx);
-		*map = ft_strjoin(*map, map_read);
-		map_read = get_next_line(fd);
-		mlx->map.winy++;
-	}
-	if ((mlx->to_collect < 1) || !(e == 1) || !(p == 1))
-		ft_perror("Error\nToo many or missing objects, exit or initial position");
-}
-
-static void	ft_get_positions(char **map, int y, t_program *mlx)
-{
-	mlx->y = 0;
-	mlx->x = 0;
-	mlx->collected = 0;
-	while ((mlx->y) < y)
-	{
-		while (map[mlx->y][mlx->x] != '\0')
-		{
-			if (map[mlx->y][mlx->x] == 'E')
-			{
-				mlx->map.ey = mlx->y;
-				mlx->map.ex = mlx->x;
-			}
-			else if (map[mlx->y][mlx->x] == 'P')
-			{
-				mlx->map.py = mlx->y;
-				mlx->map.px = mlx->x;
-			}
-			mlx->x++;
-		}
-		mlx->y++;
-		mlx->x = 0; 
-	}
-}
-
-void	ft_check_map(char *map, t_program *mlx)
+char	**ft_check_map(char *map, t_program *mlx)
 {
 	char	*map_read;
 	char	**map_done;
@@ -107,14 +106,13 @@ void	ft_check_map(char *map, t_program *mlx)
 			mlx->map.winx++;
 		if (mlx->map.winx <= mlx->map.winy)
 			ft_perror("Error\nMap must be rectangular");
+		ft_init_var(mlx);
 		map_done = ft_split(map, '\n');
 		mlx->map.visited = ft_split(map, '\n');
-		ft_wall_check(map_done, mlx);
-		ft_get_positions(map_done, mlx->map.winy, mlx);
-		printf("%i, %i\n", mlx->map.py, mlx->map.px);
-		mlx->map_done = map_done;
-		if ((ft_path_check(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
+		ft_check_wall(map_done, mlx);
+		if ((ft_check_path(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
 			ft_perror("Error\nNo path available");
 	}
 	close(fd);
+	return (map_done);
 }
