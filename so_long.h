@@ -12,10 +12,7 @@
 typedef struct	s_img {
 	int		width;
 	int		height;
-	int		y;
-	int		x;
-	int		winy;
-	int		winx;
+
 	void	*wall;
 	void	*selene;
 	void	*selenel;
@@ -32,27 +29,52 @@ typedef struct	s_img {
 	void	*paulinol3;
 }				t_img;
 
-typedef struct	s_program {
-	void	*mlx;
-	void	*win;
-	char	**p;
-	char	**map_done;
+typedef	struct	s_map {
+	int		winy;
+	int		winx;
 	int		py;
 	int		px;
-	int		falseyx;
-	int		moves;
-	int		collected;
-	int		to_collect;
-	int		end;
+	int		ey;
+	int		ex;
+	char	**visited;
 
-	t_img	img;
+}				t_map;
+
+typedef	struct	s_player {
+	int		won;
+	int		dead;
+}				t_player;
+
+typedef struct	s_program {
+	void		*mlx;
+	void		*win;
+	char		**p;
+	char		**map_done;
+	int			y;
+	int			x;
+	int			falseyx;
+	int			moves;
+	int			collected;
+	int			to_collect;
+	int			end;
+	int			frame;
+	char		*error_str;
+	int			error;
+
+	t_img		img;
+	t_player	player;
+	t_map		map;
 }				t_program;
 
 //image related
 void	ft_img_handler(t_program *mlx);
 void	ft_img_eraser(t_program *mlx);
-void	ft_redraw_map(int pathy, int pathx, int py, int px, t_program *mlx);
+void	ft_redraw_map(int py, int px, t_program *mlx);
 
+//error
+int		ft_check_ber(char *map);
+void	ft_perror(char *str);
+void	ft_img_error(t_program *mlx);
 
 //keys
 //esc = 65307 | a = 97 | w = 119 | s = 115 | d = 100|
@@ -65,7 +87,8 @@ void	ft_move_right(t_program *mlx);
 
 
 //map
-char	**ft_check_map(char *map, t_program *mlx);
+void	ft_check_map(char *map, t_program *mlx);
+char	ft_path_check(char **map, int y, int x, t_program *mlx);
 void	ft_draw_map(char **map, int y, t_program *mlx);
 void	ft_end_map(t_program *mlx);
 #endif

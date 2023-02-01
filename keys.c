@@ -5,6 +5,7 @@ int	ft_close_win(t_program *mlx)
 	ft_img_eraser(mlx);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	free(mlx->mlx);
+	free(mlx->map_done);
 	exit(0);
 	return (0);
 }

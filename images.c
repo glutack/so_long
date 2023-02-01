@@ -16,6 +16,7 @@ void	ft_img_handler(t_program *mlx)
 	(*mlx).img.paulinor1 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinor1.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.paulinor2 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinor2.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	(*mlx).img.paulinor3 = mlx_xpm_file_to_image((*mlx).mlx, "./assets/paulinor3.xpm", &((*mlx).img.width), &((*mlx).img.height));
+	ft_img_error(mlx);
 }
 
 void ft_img_eraser(t_program *mlx)
@@ -33,52 +34,51 @@ void ft_img_eraser(t_program *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img.paulinor1);
 	mlx_destroy_image(mlx->mlx, mlx->img.paulinor2);
 	mlx_destroy_image(mlx->mlx, mlx->img.paulinor3);
-
 }
 
 void	ft_draw_map(char **map, int y, t_program *mlx)
 {
-	mlx->img.y = 0;
-	mlx->img.x = 0;
-	while ((mlx->img.y) < y)
+	mlx->y = 0;
+	mlx->x = 0;
+	while ((mlx->y) < y)
 	{
-		while (map[mlx->img.y][mlx->img.x] != '\0')
+		while (map[mlx->y][mlx->x] != '\0')
 		{
-			if (map[mlx->img.y][mlx->img.x] == '1')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == '0')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == 'C')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.object, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == 'E')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.exit, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == 'B')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.paulinor1, mlx->img.x * 80, mlx->img.y * 80);
-			else if (map[mlx->img.y][mlx->img.x] == 'P')
+			if (map[mlx->y][mlx->x] == '1')
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall, mlx->x * 80, mlx->y * 80);
+			else if (map[mlx->y][mlx->x] == '0')
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, mlx->x * 80, mlx->y * 80);
+			else if (map[mlx->y][mlx->x] == 'C')
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.object, mlx->x * 80, mlx->y * 80);
+			else if (map[mlx->y][mlx->x] == 'E')
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.exit, mlx->x * 80, mlx->y * 80);
+			else if (map[mlx->y][mlx->x] == 'B')
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.paulinor1, mlx->x * 80, mlx->y * 80);
+			else if (map[mlx->y][mlx->x] == 'P')
 			{
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, mlx->img.x * 80, mlx->img.y * 80);
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene, mlx->x * 80, mlx->y * 80);
 				mlx->img.selenepos = 0;
-				mlx->py = mlx->img.y;
-				mlx->px = mlx->img.x;
+				mlx->map.py = mlx->y;
+				mlx->map.px = mlx->x;
 			}
-			mlx->img.x++;
+			mlx->x++;
 		}
-		mlx->img.y++;
-		mlx->img.x = 0; 
+		mlx->y++;
+		mlx->x = 0; 
 	}
 }
 
-void	ft_redraw_map(int pathy, int pathx, int py, int px, t_program *mlx)
+void	ft_redraw_map(int y, int x, t_program *mlx)
 {
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, pathx * 80, pathy * 80);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path, mlx->map.px * 80, mlx->map.py * 80);
 	if (mlx->img.selenepos == 1)
 	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener, px * 80, py * 80);
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener, x * 80, y * 80);
 		mlx->img.selenepos = 0;
 	}
 	else if (mlx->img.selenepos == 0)
 	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel, px * 80, py * 80);
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel, x * 80, y * 80);
 		mlx->img.selenepos = 1;
 	}
 }
@@ -87,15 +87,15 @@ void	ft_end_map(t_program *mlx)
 {
 	if (mlx->end == 1)
 	{
-		while (mlx->img.y < mlx->img.winy)
+		while (mlx->y < mlx->map.winy)
 		{
-			while (mlx->map_done[mlx->img.y][mlx->img.x] != '\0')
+			while (mlx->map_done[mlx->y][mlx->x] != '\0')
 			{
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall, mlx->img.x * 80, mlx->img.y * 80);
-				mlx->img.x++;
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall, mlx->x * 80, mlx->y * 80);
+				mlx->x++;
 			}
-			mlx->img.x = 0;
-			mlx->img.y++;
+			mlx->x = 0;
+			mlx->y++;
 		}
 	}
 }

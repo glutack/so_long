@@ -26,6 +26,14 @@
 
 char	*get_next_line(int fd);
 
+/*printf
+int				ft_printf(char const *arg, ...);
+unsigned int	ft_putchar(char c);
+unsigned int	ft_putstr(char *str);
+unsigned int	ft_putnbr(int n);
+unsigned int	ft_putnbru(unsigned long n);
+unsigned int	ft_puthex(const char *type, unsigned long n);*/
+
 		//F -> 0 | T -> 1
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
