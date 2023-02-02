@@ -69,8 +69,7 @@ typedef struct s_program {
 //image related
 void	ft_img_handler(t_program *mlx);
 void	ft_img_eraser(t_program *mlx);
-void	ft_draw_map(char **map, int y, t_program *mlx);
-void	ft_redraw_map(int py, int px, t_program *mlx);
+void	ft_animate_player(int py, int px, t_program *mlx);
 
 //error
 int		ft_check_ber(char *map);
@@ -89,6 +88,7 @@ void	ft_move_right(t_program *mlx);
 //map
 char	**ft_check_map(char *map, t_program *mlx);
 char	ft_check_path(char **map, int y, int x, t_program *mlx);
+void	ft_draw_map(char **map, t_program *mlx);
 void	ft_end_map(t_program *mlx);
 
 //other

@@ -42,7 +42,12 @@ static void	ft_init_game(t_program *mlx)
 {
 	ft_init_var(mlx);
 	ft_img_handler(mlx);
-	ft_draw_map(mlx->map_done, mlx->map.winy, mlx);
+	while (mlx->y < mlx->map.winy)
+	{
+		ft_draw_map(mlx->map_done, mlx);
+		mlx->y++;
+		mlx->x = 0;
+	}
 }
 
 void	main(int argc, char **argv)

@@ -19,7 +19,7 @@ void	ft_move_up(t_program *mlx)
 			mlx->collected++;
 		mlx->map_done[mlx->falseyx][mlx->map.px] = 'P';
 		mlx->map_done[mlx->map.py][mlx->map.px] = '0';
-		ft_redraw_map(mlx->falseyx, mlx->map.px, mlx);
+		ft_animate_player(mlx->falseyx, mlx->map.px, mlx);
 		mlx->map.py--;
 		mlx->moves++;
 		printf("moves -> %d || ", mlx->moves);
@@ -46,7 +46,7 @@ void	ft_move_down(t_program *mlx)
 			mlx->collected++;
 		mlx->map_done[mlx->falseyx][mlx->map.px] = 'P';
 		mlx->map_done[mlx->map.py][mlx->map.px] = '0';
-		ft_redraw_map(mlx->falseyx, mlx->map.px, mlx);
+		ft_animate_player(mlx->falseyx, mlx->map.px, mlx);
 		mlx->map.py++;
 		mlx->moves++;
 		printf("moves -> %d || ", mlx->moves);
@@ -73,7 +73,7 @@ void	ft_move_left(t_program *mlx)
 			mlx->collected++;
 		mlx->map_done[mlx->map.py][mlx->falseyx] = 'P';
 		mlx->map_done[mlx->map.py][mlx->map.px] = '0';
-		ft_redraw_map(mlx->map.py, mlx->falseyx, mlx);
+		ft_animate_player(mlx->map.py, mlx->falseyx, mlx);
 		mlx->map.px--;
 		mlx->moves++;
 		printf("moves -> %d || ", mlx->moves);
@@ -100,7 +100,7 @@ void	ft_move_right(t_program *mlx)
 			mlx->collected++;
 		mlx->map_done[mlx->map.py][mlx->falseyx] = 'P';
 		mlx->map_done[mlx->map.py][mlx->map.px] = '0';
-		ft_redraw_map(mlx->map.py, mlx->falseyx, mlx);
+		ft_animate_player(mlx->map.py, mlx->falseyx, mlx);
 		mlx->map.px++;
 		mlx->moves++;
 		printf("moves -> %d || ", mlx->moves);
