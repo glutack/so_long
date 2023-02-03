@@ -28,18 +28,11 @@ char	ft_check_path(char **map, int y, int x, t_program *mlx)
 
 static void	ft_draw_p(t_program *mlx)
 {
-	if (mlx->img.selenepos == 1)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener,
-			mlx->x * 80, mlx->y * 80);
-		mlx->img.selenepos = 0;
-	}
-	else if (mlx->img.selenepos == 0)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel,
-			mlx->x * 80, mlx->y * 80);
-		mlx->img.selenepos = 1;
-	}
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selene,
+		mlx->x * 80, mlx->y * 80);
+	mlx->img.selenepos = 0;
+	mlx->map.py = mlx->y;
+	mlx->map.px = mlx->x;
 }
 
 void	ft_draw_map(t_program *mlx)
@@ -66,26 +59,5 @@ void	ft_draw_map(t_program *mlx)
 		else if (mlx->map_done[mlx->y][mlx->x] == 'P')
 			ft_draw_p(mlx);
 		mlx->x++;
-	}
-}
-
-void	ft_draw_end_map(t_program *mlx)
-{
-	mlx->x = 1;
-	while (mlx->y < mlx->map.winy)
-	{
-		printf("a");
-		while (mlx->map_done[mlx->y][mlx->x] != '\0')
-		{
-			if (mlx->dead == 1)
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.paulinol1,
-					mlx->x * 80, mlx->y * 80);
-			else if (mlx->won == 1)
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
-					mlx->x * 80, mlx->y * 80);
-			mlx->x++;
-		}
-		mlx->x = 0;
-		mlx->y++;
 	}
 }

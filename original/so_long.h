@@ -43,13 +43,10 @@ typedef struct s_map {
 	int		px;
 	int		ey;
 	int		ex;
-	int		clap;
-	int		elap;
-	int		exlap;
 	void	*extptr;
 	void	*cptr;
-	void	*eptr;
-	void	*exptr;
+	int		count;
+	int		lap;
 	char	**visited;
 
 }				t_map;
@@ -68,7 +65,6 @@ typedef struct s_program {
 	int			won;
 	int			dead;
 	int			frame;
-	int			eframe;
 	char		*error_str;
 	int			error;
 
@@ -100,7 +96,7 @@ void	ft_move_right(t_program *mlx);
 char	**ft_check_map(char *map, t_program *mlx);
 char	ft_check_path(char **map, int y, int x, t_program *mlx);
 void	ft_draw_map(t_program *mlx);
-void	ft_draw_end_map(t_program *mlx);
+void	ft_end_map(t_program *mlx);
 
 //other
 void	ft_init_var(t_program *mlx);

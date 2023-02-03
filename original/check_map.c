@@ -110,6 +110,8 @@ char	**ft_check_map(char *map, t_program *mlx)
 		map_done = ft_split(map, '\n');
 		mlx->map.visited = ft_split(map, '\n');
 		ft_check_wall(map_done, mlx);
+		mlx->collected = 0;
+		mlx->won = 0;
 		if ((ft_check_path(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
 			ft_perror("Error\nNo path available");
 	}
