@@ -22,13 +22,14 @@ void	ft_perror(char *str)
 
 void	ft_end_map(t_program *mlx)
 {
-	if (mlx->end == 1)
+	mlx->x = 1;
+	if (mlx->won == 1)
 	{
 		while (mlx->y < mlx->map.winy)
 		{
 			while (mlx->map_done[mlx->y][mlx->x] != '\0')
 			{
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall,
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
 					mlx->x * 80, mlx->y * 80);
 				mlx->x++;
 			}
@@ -37,3 +38,21 @@ void	ft_end_map(t_program *mlx)
 		}
 	}
 }
+
+/*void	ft_end_map(t_program *mlx)
+{
+	if (mlx->won == 1)
+	{
+		while (mlx->y < mlx->map.winy)
+		{
+			while (mlx->map_done[mlx->y][mlx->x] != '\0')
+			{
+				ft_print_cell(mlx);
+				usleep(100);
+				mlx->x++;
+			}
+			mlx->x = 0;
+			mlx->y++;
+		}
+	}
+}*/

@@ -10,6 +10,17 @@ int	ft_close_win(t_program *mlx)
 	return (0);
 }
 
+void	ft_move_player(int move_code, t_program *mlx)
+{
+	if (move_code == 1)
+	{
+		ft_animate_player((mlx->map.py - 1), mlx->map.px, mlx);
+		mlx->map.py--;
+	}
+	mlx->moves++;
+	ft_update_moves(mlx);
+}
+
 int	ft_keys(int keycode, void *program)
 {
 	t_program	*mlx;
@@ -17,27 +28,30 @@ int	ft_keys(int keycode, void *program)
 	mlx = program;
 	if (keycode == 65307 || keycode == 53)
 		ft_close_win(mlx);
-	else if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
+	if (mlx->won != 1)
 	{
-		if (keycode == 13)
-			ft_move_up(program);
-		else if (keycode == 0)
-			ft_move_left(program);
-		else if (keycode == 1)
-			ft_move_down(program);
-		else if (keycode == 2)
-			ft_move_right(program);
-	}
-	else if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100)
-	{
-		if (keycode == 119)
-			ft_move_up(program);
-		else if (keycode == 97)
-			ft_move_left(program);
-		else if (keycode == 115)
-			ft_move_down(program);
-		else if (keycode == 100)
-			ft_move_right(program);
+		if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
+		{
+			if (keycode == 13)
+				ft_move_up(program);
+			else if (keycode == 0)
+				ft_move_left(program);
+			else if (keycode == 1)
+				ft_move_down(program);
+			else if (keycode == 2)
+				ft_move_right(program);
+		}
+		else if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100)
+		{
+			if (keycode == 119)
+				ft_move_up(program);
+			else if (keycode == 97)
+				ft_move_left(program);
+			else if (keycode == 115)
+				ft_move_down(program);
+			else if (keycode == 100)
+				ft_move_right(program);
+		}
 	}
 	return (0);
 }

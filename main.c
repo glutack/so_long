@@ -2,8 +2,7 @@
 
 //mlx makefile change
 
-//					MAIN.C
-//initializes mlx connection, creates window, checks map, creates map, calls keystroke functions
+// AÑADIR FT_PRINTF A LIBFT Y CAMBIAR PRINTF
 
 int	ft_check_ber(char *map)
 {
@@ -31,9 +30,6 @@ int	ft_check_ber(char *map)
 
 void	ft_init_var(t_program *mlx)
 {
-	mlx->moves = 0;
-	mlx->collected = 0;
-	mlx->end = 0;
 	mlx->y = 0;
 	mlx->x = 0;
 }
@@ -42,12 +38,22 @@ static void	ft_init_game(t_program *mlx)
 {
 	ft_init_var(mlx);
 	ft_img_handler(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
+		mlx->x * 80, mlx->y * 80);
+	mlx->x = 1;
+	mlx->map.cptr = mlx->img.object;
+	mlx->img.selenepos = 0;
+	mlx->moves = 0;
+	mlx->collected = 0;
+	mlx->frame = 0;
+	mlx->won = 0;
 	while (mlx->y < mlx->map.winy)
 	{
-		ft_draw_map(mlx->map_done, mlx);
+		ft_draw_map(mlx);
 		mlx->y++;
 		mlx->x = 0;
 	}
+	ft_update_moves(mlx);
 }
 
 void	main(int argc, char **argv)
@@ -56,6 +62,9 @@ void	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		ft_init_var(&mlx);
+		mlx.collected = 0;
+		mlx.won = 0;
 		mlx.map_done = ft_check_map(argv[1], &mlx);
 		if (!mlx.map_done)
 			ft_perror("Error\nCould not load map");
