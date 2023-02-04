@@ -46,8 +46,6 @@ typedef struct s_map {
 	int		clap;
 	int		elap;
 	int		exlap;
-	char	**enemyexit;
-	char	**enemycol;
 	void	*extptr;
 	void	*cptr;
 	void	*eptr;

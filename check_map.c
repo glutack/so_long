@@ -96,23 +96,21 @@ char	**ft_check_map(char *map, t_program *mlx)
 
 	mlx->map.winy = 0;
 	mlx->map.winx = 0;
-	if (ft_check_ber(map) == 1)
-	{
-		fd = open(map, O_RDONLY);
-		if (!fd)
-			ft_perror("Error\nRead error");
-		ft_reading_map(map_read, &map, fd, mlx);
-		while (map[mlx->map.winx] != '\n')
-			mlx->map.winx++;
-		if (mlx->map.winx == mlx->map.winy)
-			ft_perror("Error\nMap must be rectangular");
-		ft_init_var(mlx);
-		map_done = ft_split(map, '\n');
-		mlx->map.visited = ft_split(map, '\n');
-		ft_check_wall(map_done, mlx);
-		if ((ft_check_path(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
-			ft_perror("Error\nNo path available");
-	}
+	fd = open(map, O_RDONLY);
+	if (!fd)
+		ft_perror("Error\nRead error");
+	ft_reading_map(map_read, &map, fd, mlx);
+	while (map[mlx->map.winx] != '\n')
+		mlx->map.winx++;
+	if (mlx->map.winx == mlx->map.winy)
+		ft_perror("Error\nMap must be rectangular");
+	ft_init_var(mlx);
+	map_done = ft_split(map, '\n');
+	mlx->map.visited = ft_split(map, '\n');
+	ft_check_wall(map_done, mlx);
+	if ((ft_check_path(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
+		ft_perror("Error\nNo path available");
+	mlx->map.visited = ft_split(map, '\n');
 	close(fd);
 	return (map_done);
 }

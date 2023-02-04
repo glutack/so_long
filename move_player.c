@@ -29,6 +29,7 @@ void	ft_move_up(t_program *mlx)
 		{
 			mlx->collected++;
 			mlx->map_done[mlx->map.py - 1][mlx->map.px] = '0';
+			mlx->map.visited[mlx->map.py - 1][mlx->map.px] = '0';
 		}
 		mlx->map.py--;
 		mlx->moves++;
@@ -48,6 +49,7 @@ void	ft_move_down(t_program *mlx)
 		{
 			mlx->collected++;
 			mlx->map_done[mlx->map.py + 1][mlx->map.px] = '0';
+			mlx->map.visited[mlx->map.py + 1][mlx->map.px] = '0';
 		}
 		mlx->map.py++;
 		mlx->moves++;
@@ -67,6 +69,7 @@ void	ft_move_left(t_program *mlx)
 		{
 			mlx->collected++;
 			mlx->map_done[mlx->map.py][mlx->map.px - 1] = '0';
+			mlx->map.visited[mlx->map.py][mlx->map.px - 1] = '0';
 		}
 		mlx->map.px--;
 		mlx->moves++;
@@ -86,6 +89,7 @@ void	ft_move_right(t_program *mlx)
 		{
 			mlx->collected++;
 			mlx->map_done[mlx->map.py][mlx->map.px + 1] = '0';
+			mlx->map.visited[mlx->map.py][mlx->map.px + 1] = '0';
 		}
 		mlx->map.px++;
 		mlx->moves++;

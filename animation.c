@@ -87,7 +87,7 @@ static void	ft_animate_map(t_program *mlx)
 			if (mlx->map_done[mlx->y][mlx->x] == 'C')
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.cptr,
 					mlx->x * 80, mlx->y * 80);
-			else if (mlx->map_done[mlx->y][mlx->x] == 'E')
+			else if (mlx->map_done[mlx->y][mlx->x] == 'E' && mlx->won == 0)
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
 					mlx->x * 80, mlx->y * 80);
 			else if (mlx->map_done[mlx->y][mlx->x] == 'B')
@@ -107,16 +107,28 @@ void	ft_move_enemies(t_program *mlx)
 	{
 		while (mlx->map_done[mlx->y][mlx->x] != '\0')
 		{
-			if (mlx->map_done[mlx->y][mlx->x - 1] != '1')
+			if (mlx->map_done[mlx->y][mlx->x - 1] != '1' && mlx->map_done[mlx->y][mlx->x - 1] != 'B')
 			{	
 				if (mlx->map_done[mlx->y][mlx->x] == 'B')
 				{
-					mlx->map_done[mlx->y][mlx->x] = '0';
-					mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path,
-					mlx->x * 80, mlx->y * 80);
-					mlx->map_done[mlx->y][mlx->x - 1] = 'B';
+					if (mlx->map.visited[mlx->y][mlx->x] == 'E')
+					{
+						mlx->map_done[mlx->y][mlx->x] = 'E';
+						mlx->map_done[mlx->y][mlx->x - 1] = 'B';
+					}
+					else
+					{
+						mlx->map_done[mlx->y][mlx->x] = '0';
+						mlx_put_image_to_window(mlx->mlx, mlx->win,
+							mlx->img.path, mlx->x * 80, mlx->y * 80);
+						mlx->map_done[mlx->y][mlx->x - 1] = 'B';
+					}
+					if (mlx->map.visited[mlx->y][mlx->x] == 'C')
+					{
+						mlx->map_done[mlx->y][mlx->x] = 'C';
+						mlx->map_done[mlx->y][mlx->x - 1] = 'B';
+					}
 				}
-
 			}
 			mlx->x++;
 		}
@@ -130,7 +142,7 @@ int	ft_animation(void *program)
 	t_program	*mlx;
 
 	mlx = program;
-	if (mlx->dead || mlx->won)
+	if (mlx->dead || mlx->won == 1)
 		return (1);
 	if (mlx->frame == 2999)
 		ft_animate_map(mlx);

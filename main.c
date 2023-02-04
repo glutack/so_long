@@ -52,8 +52,6 @@ static void	ft_init_game(t_program *mlx)
 	mlx->map.clap = 0;
 	mlx->map.elap = 0;
 	mlx->map.exlap = 0;
-	mlx->map.enemyexit = 0;
-	mlx->map.enemycol = 0;
 	mlx->won = 0;
 	while (mlx->y < mlx->map.winy)
 	{
@@ -73,7 +71,8 @@ void	main(int argc, char **argv)
 		ft_init_var(&mlx);
 		mlx.collected = 0;
 		mlx.won = 0;
-		mlx.map_done = ft_check_map(argv[1], &mlx);
+		if (ft_check_ber(argv[1]) == 1)
+			mlx.map_done = ft_check_map(argv[1], &mlx);
 		if (!mlx.map_done)
 			ft_perror("Error\nCould not load map");
 		mlx.mlx = mlx_init();

@@ -26,7 +26,7 @@ void	ft_animate_player(int y, int x, t_program *mlx)
 {
 	if (mlx->won == 2)
 	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
 			mlx->map.px * 80, mlx->map.py * 80);
 		mlx->won = 0;
 	}
