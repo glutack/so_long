@@ -52,6 +52,8 @@ static void	ft_init_game(t_program *mlx)
 	mlx->map.clap = 0;
 	mlx->map.elap = 0;
 	mlx->map.exlap = 0;
+	mlx->map.enemyexit = 0;
+	mlx->map.enemycol = 0;
 	mlx->won = 0;
 	while (mlx->y < mlx->map.winy)
 	{

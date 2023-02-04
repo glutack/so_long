@@ -10,6 +10,45 @@ int	ft_close_win(t_program *mlx)
 	return (0);
 }
 
+void	ft_update_moves(t_program *mlx)
+{
+	char	*moves;
+
+	moves = ft_itoa(mlx->moves);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
+		0 * 80, 0 * 80);
+	mlx_string_put(mlx->mlx, mlx->win, 25, 35, 000000, "moves");
+	mlx_string_put(mlx->mlx, mlx->win, 38, 50, 000000, ft_itoa(mlx->moves));
+	free(moves);
+}
+
+void	ft_animate_player(int y, int x, t_program *mlx)
+{
+	if (mlx->won == 2)
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
+			mlx->map.px * 80, mlx->map.py * 80);
+		mlx->won = 0;
+	}
+	else if (mlx->won == 0)
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path,
+			mlx->map.px * 80, mlx->map.py * 80);
+	if (mlx->map.pptr == mlx->img.selener)
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener,
+			x * 80, y * 80);
+		mlx->map.pptr = mlx->img.selenel;
+		mlx->map_done[mlx->map.py][mlx->map.px] == 'P';
+	}
+	else if (mlx->map.pptr == mlx->img.selenel)
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel,
+			x * 80, y * 80);
+		mlx->map.pptr = mlx->img.selener;
+		mlx->map_done[mlx->map.py][mlx->map.px] == 'P';
+	}
+}
+
 int	ft_keys(int keycode, void *program)
 {
 	t_program	*mlx;
@@ -17,7 +56,7 @@ int	ft_keys(int keycode, void *program)
 	mlx = program;
 	if (keycode == 65307 || keycode == 53)
 		ft_close_win(mlx);
-	if (mlx->won != 1)
+	if (mlx->won != 1 && mlx->dead != 1)
 	{
 		if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
 		{
@@ -44,4 +83,3 @@ int	ft_keys(int keycode, void *program)
 	}
 	return (0);
 }
-

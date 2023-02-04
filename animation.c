@@ -93,9 +93,6 @@ static void	ft_animate_map(t_program *mlx)
 			else if (mlx->map_done[mlx->y][mlx->x] == 'B')
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
 					mlx->x * 80, mlx->y * 80);
-			else if (mlx->map_done[mlx->y][mlx->x] == '0')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path,
-					mlx->x * 80, mlx->y * 80);
 			mlx->x++;
 		}
 		mlx->y++;
@@ -111,12 +108,15 @@ void	ft_move_enemies(t_program *mlx)
 		while (mlx->map_done[mlx->y][mlx->x] != '\0')
 		{
 			if (mlx->map_done[mlx->y][mlx->x - 1] != '1')
-			{
+			{	
 				if (mlx->map_done[mlx->y][mlx->x] == 'B')
 				{
 					mlx->map_done[mlx->y][mlx->x] = '0';
+					mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path,
+					mlx->x * 80, mlx->y * 80);
 					mlx->map_done[mlx->y][mlx->x - 1] = 'B';
 				}
+
 			}
 			mlx->x++;
 		}

@@ -32,7 +32,6 @@ void	ft_init_var(t_program *mlx)
 {
 	mlx->y = 0;
 	mlx->x = 0;
-
 }
 
 static void	ft_init_game(t_program *mlx)
@@ -43,10 +42,16 @@ static void	ft_init_game(t_program *mlx)
 		mlx->x * 80, mlx->y * 80);
 	mlx->x = 1;
 	mlx->map.cptr = mlx->img.object;
-	mlx->img.selenepos = 0;
+	mlx->map.exptr = mlx->img.exit0;
+	mlx->map.eptr = mlx->img.paulinor2;
+	mlx->map.pptr = mlx->img.selener;
 	mlx->moves = 0;
-	mlx->frame = 0;
 	mlx->collected = 0;
+	mlx->frame = 0;
+	mlx->eframe = 0;
+	mlx->map.clap = 0;
+	mlx->map.elap = 0;
+	mlx->map.exlap = 0;
 	mlx->won = 0;
 	while (mlx->y < mlx->map.winy)
 	{
@@ -64,6 +69,8 @@ void	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		ft_init_var(&mlx);
+		mlx.collected = 0;
+		mlx.won = 0;
 		mlx.map_done = ft_check_map(argv[1], &mlx);
 		if (!mlx.map_done)
 			ft_perror("Error\nCould not load map");
@@ -84,7 +91,6 @@ void	main(int argc, char **argv)
 	else
 		ft_perror("Error\nIncorrect number of arguments");
 }
-
 
 //bonus
 /*mlx_string_put para contador

@@ -18,7 +18,6 @@ typedef struct s_img {
 	void	*selene;
 	void	*selenel;
 	void	*selener;
-	int		selenepos;
 	void	*path;
 	void	*exit;
 	void	*exit0;
@@ -43,10 +42,14 @@ typedef struct s_map {
 	int		px;
 	int		ey;
 	int		ex;
+	int		clap;
+	int		elap;
+	int		exlap;
+	void	*pptr;
 	void	*extptr;
 	void	*cptr;
-	int		count;
-	int		lap;
+	void	*eptr;
+	void	*exptr;
 	char	**visited;
 
 }				t_map;
@@ -65,6 +68,7 @@ typedef struct s_program {
 	int			won;
 	int			dead;
 	int			frame;
+	int			eframe;
 	char		*error_str;
 	int			error;
 
@@ -96,7 +100,8 @@ void	ft_move_right(t_program *mlx);
 char	**ft_check_map(char *map, t_program *mlx);
 char	ft_check_path(char **map, int y, int x, t_program *mlx);
 void	ft_draw_map(t_program *mlx);
-void	ft_end_map(t_program *mlx);
+void	ft_draw_p(t_program *mlx);
+void	ft_draw_end_map(t_program *mlx);
 
 //other
 void	ft_init_var(t_program *mlx);
