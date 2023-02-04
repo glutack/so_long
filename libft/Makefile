@@ -31,26 +31,29 @@ all: $(NAME)
 
 %.o: %.c
 	@gcc ${CFLAGS} -c $< -o $@
-	@echo "Objetos creados"
+	@echo "libft -> objetos creados"
 
 $(NAME): ${OBJS} $(FT_PRINTF)
+	@make -C ./ft_printf
 	@gcc -c ${CFLAGS} ${SRCS}
 	@ar crs ${NAME} ${OBJS}
-	@echo "Librería creada"
+	@echo "libft -> creada"
 
 bonus: $(NAME) ${OBJS_BONUS}
 	@ar crs ${NAME} ${OBJS_BONUS}
-	@echo "Bonus creado"
+	@echo "libft -> bonus creado"
 
 clean: 
+	@make -C ./ft_printf clean
 	@${RM} ${OBJS} ${OBJS_BONUS}
-	@echo "Objetos eliminados"
+	@echo "libft -> objetos eliminados"
 
 fclean: clean
+	@make -C ./ft_printf fclean
 	@${RM} ${NAME}
-	@echo "Librería eliminada"
+	@echo "libft -> eliminado"
 
 re: fclean all
-	@echo ":D"
+	@echo "libft :D"
 
 .PHONY: all clean fclean re bonus

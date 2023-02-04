@@ -81,6 +81,7 @@ void	ft_img_handler(t_program *mlx);
 void	ft_img_eraser(t_program *mlx);
 int		ft_animation(void *program);
 void	ft_animate_player(int py, int px, t_program *mlx);
+void	ft_move_enemy(t_program *mlx);
 
 //error
 int		ft_check_ber(char *map);
@@ -101,6 +102,7 @@ char	**ft_check_map(char *map, t_program *mlx);
 char	ft_check_path(char **map, int y, int x, t_program *mlx);
 void	ft_draw_map(t_program *mlx);
 void	ft_draw_end_map(t_program *mlx);
+void	ft_end_map(t_program *mlx);
 
 //other
 void	ft_init_var(t_program *mlx);

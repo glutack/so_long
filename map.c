@@ -8,7 +8,7 @@ char	ft_check_path(char **map, int y, int x, t_program *mlx)
 		return ('F');
 	if (mlx->map.visited[y][x] == 'T')
 		return ('F');
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == 'B')
 		return ('F');
 	if (map[y][x] == 'C')
 		mlx->collected++;
@@ -58,10 +58,10 @@ void	ft_draw_map(t_program *mlx)
 				mlx->x * 80, mlx->y * 80);
 		}
 		else if (mlx->map_done[mlx->y][mlx->x] == 'E')
-			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.exit,
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
 				mlx->x * 80, mlx->y * 80);
 		else if (mlx->map_done[mlx->y][mlx->x] == 'B')
-			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.paulinor1,
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
 				mlx->x * 80, mlx->y * 80);
 		else if (mlx->map_done[mlx->y][mlx->x] == 'P')
 			ft_draw_p(mlx);

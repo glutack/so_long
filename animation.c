@@ -52,25 +52,25 @@ static void	ft_animate_exit(t_program *mlx)
 	}
 }
 
-static void	ft_animate_enemies(t_program *mlx)
+static void	ft_animate_enemy(t_program *mlx)
 {
 	if (mlx->map.elap == 0)
+	{
+		if (mlx->map.eptr == mlx->img.paulinol1)
+			mlx->map.eptr = mlx->img.paulinol2;
+		else if (mlx->map.eptr == mlx->img.paulinol2)
+			mlx->map.eptr = mlx->img.paulinol3;
+		else if (mlx->map.eptr == mlx->img.paulinol3)
+			mlx->map.eptr = mlx->img.paulinol1;
+	}
+	else if (mlx->map.elap == 1)
 	{
 		if (mlx->map.eptr == mlx->img.paulinor1)
 			mlx->map.eptr = mlx->img.paulinor2;
 		else if (mlx->map.eptr == mlx->img.paulinor2)
 			mlx->map.eptr = mlx->img.paulinor3;
 		else if (mlx->map.eptr == mlx->img.paulinor3)
-			mlx->map.elap++;
-	}
-	else if (mlx->map.elap == 1)
-	{
-		if (mlx->map.eptr == mlx->img.paulinor3)
-			mlx->map.eptr = mlx->img.paulinor2;
-		else if (mlx->map.eptr == mlx->img.paulinor2)
 			mlx->map.eptr = mlx->img.paulinor1;
-		else if (mlx->map.eptr == mlx->img.paulinor1)
-			mlx->map.elap--;
 	}
 }
 
@@ -79,7 +79,7 @@ static void	ft_animate_map(t_program *mlx)
 	ft_init_var(mlx);
 	ft_animate_obj(mlx);
 	ft_animate_exit(mlx);
-	ft_animate_enemies(mlx);
+	ft_animate_enemy(mlx);
 	while (mlx->y < mlx->map.winy)
 	{
 		while (mlx->map_done[mlx->y][mlx->x] != '\0')
@@ -91,44 +91,9 @@ static void	ft_animate_map(t_program *mlx)
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
 					mlx->x * 80, mlx->y * 80);
 			else if (mlx->map_done[mlx->y][mlx->x] == 'B')
+			{
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
 					mlx->x * 80, mlx->y * 80);
-			mlx->x++;
-		}
-		mlx->y++;
-		mlx->x = 0;
-	}
-}
-
-void	ft_move_enemies(t_program *mlx)
-{
-	ft_init_var(mlx);
-	while (mlx->y < mlx->map.winy)
-	{
-		while (mlx->map_done[mlx->y][mlx->x] != '\0')
-		{
-			if (mlx->map_done[mlx->y][mlx->x - 1] != '1' && mlx->map_done[mlx->y][mlx->x - 1] != 'B')
-			{	
-				if (mlx->map_done[mlx->y][mlx->x] == 'B')
-				{
-					if (mlx->map.visited[mlx->y][mlx->x] == 'E')
-					{
-						mlx->map_done[mlx->y][mlx->x] = 'E';
-						mlx->map_done[mlx->y][mlx->x - 1] = 'B';
-					}
-					else
-					{
-						mlx->map_done[mlx->y][mlx->x] = '0';
-						mlx_put_image_to_window(mlx->mlx, mlx->win,
-							mlx->img.path, mlx->x * 80, mlx->y * 80);
-						mlx->map_done[mlx->y][mlx->x - 1] = 'B';
-					}
-					if (mlx->map.visited[mlx->y][mlx->x] == 'C')
-					{
-						mlx->map_done[mlx->y][mlx->x] = 'C';
-						mlx->map_done[mlx->y][mlx->x - 1] = 'B';
-					}
-				}
 			}
 			mlx->x++;
 		}
@@ -145,9 +110,11 @@ int	ft_animation(void *program)
 	if (mlx->dead || mlx->won == 1)
 		return (1);
 	if (mlx->frame == 2999)
+	{
 		ft_animate_map(mlx);
+	}
 	if (mlx->eframe == 19999)
-		ft_move_enemies(mlx);
+		ft_move_enemy(mlx);
 	mlx->frame++;
 	mlx->eframe++;
 	if (mlx->frame == 3000)

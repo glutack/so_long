@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static void	ft_end_map(t_program *mlx)
+void	ft_end_map(t_program *mlx)
 {
 	ft_init_var(mlx);
 	if (mlx->map_done[mlx->map.py][mlx->map.px] == 'E')
