@@ -68,7 +68,7 @@ int	ft_keys(int keycode, void *program)
 	if (mlx->won != 1 && mlx->dead != 1)
 	{
 		//ft_putstr_fd("%d", keycode);
-		if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
+		/*if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
 		{
 			if (keycode == 13)
 				ft_move_up(program);
@@ -78,17 +78,17 @@ int	ft_keys(int keycode, void *program)
 				ft_move_down(program);
 			else if (keycode == 2)
 				ft_move_right(program);
-		}
-		else if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100)
+		}*/
+		if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100)
 		{
-			if (keycode == 119)
-				ft_move_up(program);
-			else if (keycode == 97)
-				ft_move_left(program);
-			else if (keycode == 115)
-				ft_move_down(program);
-			else if (keycode == 100)
-				ft_move_right(program);
+			if (keycode == 119) //w
+				ft_move_updown((-1), program);
+			else if (keycode == 97) //a
+				ft_move_leftright((-1), program);
+			else if (keycode == 115) //s
+				ft_move_updown(1, program);
+			else if (keycode == 100) //d
+				ft_move_leftright(1, program);
 		}
 	}
 	return (0);

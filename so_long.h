@@ -89,10 +89,12 @@ void	ft_img_error(t_program *mlx);
 //keys
 int		ft_close_win(t_program *mlx);
 int		ft_keys(int key, void *program);
-void	ft_move_up(t_program *mlx);
+void	ft_move_updown(int m, t_program *mlx);
+void	ft_move_leftright(int m, t_program *mlx);
+/*void	ft_move_up(t_program *mlx);
 void	ft_move_down(t_program *mlx);
 void	ft_move_left(t_program *mlx);
-void	ft_move_right(t_program *mlx);
+void	ft_move_right(t_program *mlx);*/
 
 //map
 char	**ft_check_map(char *map, t_program *mlx); //
