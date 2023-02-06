@@ -2,7 +2,7 @@
 
 // AÑADIR FT_PRINTF A LIBFT Y CAMBIAR PRINTF
 
-int	ft_check_ber(char *map)
+static int	ft_check_ber(char *map)
 {
 	int	i;
 
@@ -62,10 +62,10 @@ static void	ft_init_basics(t_program *mlx)
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		ft_perror("Error\nCould not initialize MLX", mlx);
-	mlx->win = mlx_new_window(mlx->mlx, mlx->map.winx * SIZE, mlx->map.winy * SIZE,
-			"Las aventuras de Selene");
+	mlx->win = mlx_new_window(mlx->mlx, mlx->map.winx * 80,
+			mlx->map.winy * 80, "Las aventuras de Selene");
 	if (!mlx->win)
-		ft_perror("Error\nCould not open window", mlx);
+		ft_perror("Error\nCould not initialize window", mlx);
 }
 
 void	main(int argc, char **argv)

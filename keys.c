@@ -21,41 +21,16 @@ void	ft_update_moves(t_program *mlx)
 	collected = ft_itoa(mlx->collected);
 	tocollect = ft_itoa(mlx->to_collect);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
-		0 * SIZE, 0 * SIZE);
+		0 * 80, 0 * 80);
 	mlx_string_put(mlx->mlx, mlx->win, 25, 22, 000000, "moves");
 	mlx_string_put(mlx->mlx, mlx->win, 35, 32, 000000, moves);
 	mlx_string_put(mlx->mlx, mlx->win, 20, 46, 000000, "chicken");
 	mlx_string_put(mlx->mlx, mlx->win, 26, 56, 000000, "wings");
-	mlx_string_put(mlx->mlx, mlx->win, 23, 66, 000000, collected);
+	mlx_string_put(mlx->mlx, mlx->win, 19, 66, 000000, collected);
 	mlx_string_put(mlx->mlx, mlx->win, 35, 66, 000000, "/");
 	mlx_string_put(mlx->mlx, mlx->win, 50, 66, 000000, tocollect);
 	free(moves);
 	free(collected);
-}
-
-void	ft_animate_player(int y, int x, t_program *mlx)
-{
-	if (mlx->won == 2)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
-			mlx->map.px * SIZE, mlx->map.py * SIZE);
-		mlx->won = 0;
-	}
-	else
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path,
-			mlx->map.px * SIZE, mlx->map.py * SIZE);
-	if (mlx->img.selenepos == 1)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener,
-			x * SIZE, y * SIZE);
-		mlx->img.selenepos = 0;
-	}
-	else if (mlx->img.selenepos == 0)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel,
-			x * SIZE, y * SIZE);
-		mlx->img.selenepos = 1;
-	}
 }
 
 int	ft_keys(int keycode, void *program)

@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static void	ft_check_chars(char *str, int c, int *e, int *p, t_program *mlx)
+static void	ft_check_chars(char *str, int *e, int *p, t_program *mlx)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ static char	*ft_reading_map(char *map_read, char *map, int fd, t_program *mlx)
 	map = "\0";
 	while (map_read)
 	{
-		ft_check_chars(map_read, mlx->to_collect, &e, &p, mlx);
+		ft_check_chars(map_read, &e, &p, mlx);
 		map = ft_strjoin(map, map_read);
 		map_read = get_next_line(fd);
 		mlx->map.winy++;
@@ -74,6 +74,7 @@ static void	ft_check_wall(char **map, t_program *mlx)
 {
 	mlx->x = (mlx->map.winx - 1);
 	mlx->y = (mlx->map.winy - 1);
+	
 	while (mlx->x >= 0)
 	{	
 		if ((map[mlx->y][mlx->x] != '1') || (map[0][mlx->x] != '1'))
@@ -82,8 +83,7 @@ static void	ft_check_wall(char **map, t_program *mlx)
 			mlx->x--;
 	}
 	mlx->x = (mlx->map.winx - 1);
-	mlx->y--;
-	while (mlx->y > 0)
+	while (mlx->y >= 0)
 	{
 		if ((map[mlx->y][0] != '1') || (map[mlx->y][mlx->x] != '1'))
 			ft_perror("Error\nMap is not closed", mlx);

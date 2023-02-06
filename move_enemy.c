@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static void	ft_move_enemy_left(t_program *mlx)
+static void	ft_place_enemy(int mov, t_program *mlx)
 {
 	if (mlx->map_done[mlx->y][mlx->x] == 'B')
 	{
@@ -10,31 +10,15 @@ static void	ft_move_enemy_left(t_program *mlx)
 		{							
 			mlx->map_done[mlx->y][mlx->x] = '0';
 			mlx_put_image_to_window(mlx->mlx, mlx->win,
-				mlx->img.path, mlx->x * SIZE, mlx->y * SIZE);
+				mlx->img.path, mlx->x * 80, mlx->y * 80);
 		}
 		if (mlx->map.visited[mlx->y][mlx->x] == 'C')
 			mlx->map_done[mlx->y][mlx->x] = 'C';
-		mlx->map_done[mlx->y][mlx->x - 1] = 'B';
+		mlx->map_done[mlx->y][mlx->x + (mov)] = 'B';
 	}
 }
 
-static void	ft_move_enemy_right(t_program *mlx)
-{
-	if (mlx->map_done[mlx->y][mlx->x] == 'B')
-	{
-		mlx->map_done[mlx->y][mlx->x] = '0';
-		mlx_put_image_to_window(mlx->mlx, mlx->win,
-			mlx->img.path, mlx->x * SIZE, mlx->y * SIZE);
-		if (mlx->map.visited[mlx->y][mlx->x] == 'C')
-			mlx->map_done[mlx->y][mlx->x] = 'C';
-		if (mlx->map.visited[mlx->y][mlx->x] == 'E')
-			mlx->map_done[mlx->y][mlx->x] = 'E';
-		mlx->map_done[mlx->y][mlx->x + 1] = 'B';
-		mlx->x++;
-	}
-}
-
-static void	ft_change_elap(t_program *mlx)
+void	ft_change_elap(t_program *mlx)
 {
 	if (mlx->map.elap == 1)
 	{
@@ -50,34 +34,28 @@ static void	ft_change_elap(t_program *mlx)
 
 void	ft_move_enemy(t_program *mlx)
 {
-	ft_init_var(mlx);
-	ft_change_elap(mlx);
-	while (mlx->y < mlx->map.winy)
+	while (mlx->map_done[mlx->y][mlx->x] != '\0')
 	{
-		while (mlx->map_done[mlx->y][mlx->x] != '\0')
+		if (mlx->map.elap == 0)
 		{
-			if (mlx->map.elap == 0)
-			{
-				if (mlx->map_done[mlx->y][mlx->x - 1] != '1'
-						&& mlx->map_done[mlx->y][mlx->x - 1] != 'B')
-				{
-					ft_move_enemy_left(mlx);
-				}
-			}
-			else
-			{
-				if (mlx->map_done[mlx->y][mlx->x + 1] != '1'
-						&& mlx->map_done[mlx->y][mlx->x + 1] != 'B')
-					ft_move_enemy_right(mlx);
-			}
-			mlx->x++;
+			if (mlx->map_done[mlx->y][mlx->x - 1] != '1'
+					&& mlx->map_done[mlx->y][mlx->x - 1] != 'B')
+				ft_place_enemy((-1), mlx);
 		}
-		if (mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
+		else
 		{
-			mlx->dead = 1;
-			ft_draw_end_map(mlx);
+			if (mlx->map_done[mlx->y][mlx->x + 1] != '1'
+					&& mlx->map_done[mlx->y][mlx->x + 1] != 'B')
+			{
+				ft_place_enemy(1, mlx);
+				mlx->x++;
+			}
 		}
-		mlx->y++;
-		mlx->x = 0;
+		mlx->x++;
+	}
+	if (mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
+	{
+		mlx->dead = 1;
+		ft_draw_end_map(mlx);
 	}
 }

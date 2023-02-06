@@ -57,17 +57,13 @@ static char	*ft_gnlstrjoin(char *save, char *buff)
 	i = 0;
 	j = 0;
 	while (save[i] != '\0')
-	{
-		str[i] = save[i];
-		i++;
-	}
+		str[i++] = save[i];
 	while (buff[j] != '\0')
 		str[i++] = buff [j++];
 	str[ft_strlen(save) + ft_strlen(buff)] = '\0';
 	free(save);
 	return (str);
 }
-
 
 static char	*ft_read_fd(int fd, char *save)
 {
@@ -139,12 +135,3 @@ char	*get_next_line(int fd)
 	save[fd] = ft_new_save(save[fd]);
 	return (line);
 }
-
-/*int main ()
-{
-	int fd;
-
-	fd = open("hola.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-}
-*/

@@ -86,7 +86,8 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 			/* compares byte string s1 against byte string s2, both assumed to
 			be n bytes long
-				RETURN -> int according as s1 is greater, equal or less than s2*/
+				RETURN -> int according as s1 is greater, equal or less than
+				s2*/
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 			/* locates first occurrence of string needle in string haystack up
 			to len characters. Chars after \0 are not searched

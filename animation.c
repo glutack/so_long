@@ -99,7 +99,16 @@ int	ft_animation(void *program)
 	if (mlx->frame == 2999)
 		ft_animate_map(mlx);
 	if (mlx->eframe == 19999)
-		ft_move_enemy(mlx);
+	{
+		ft_init_var(mlx);
+		ft_change_elap(mlx);
+		while (mlx->y < mlx->map.winy)
+		{
+			ft_move_enemy(mlx);
+			mlx->y++;
+			mlx->x = 0;
+		}
+	}
 	mlx->frame++;
 	mlx->eframe++;
 	if (mlx->frame == 3000)
