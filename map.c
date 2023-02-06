@@ -71,10 +71,10 @@ void	ft_draw_map(t_program *mlx)
 
 void	ft_draw_end_map(t_program *mlx)
 {
+	ft_init_var(mlx);
 	mlx->x = 1;
 	while (mlx->y < mlx->map.winy)
 	{
-		printf("a");
 		while (mlx->map_done[mlx->y][mlx->x] != '\0')
 		{
 			if (mlx->dead == 1)
@@ -85,7 +85,7 @@ void	ft_draw_end_map(t_program *mlx)
 					mlx->x * 80, mlx->y * 80);
 			mlx->x++;
 		}
-		mlx->x = 0;
 		mlx->y++;
+		mlx->x = 0;
 	}
 }

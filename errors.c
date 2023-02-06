@@ -10,30 +10,19 @@ void	ft_img_error(t_program *mlx)
 		|| !mlx->img.paulinor3)
 	{
 		ft_img_eraser(mlx);
-		ft_perror("Error\nCould not load sprites");
+		ft_perror("Error\nCould not load sprites", mlx);
 	}
 }
 
-void	ft_perror(char *str)
+void	ft_perror(char *str, t_program *mlx)
 {
 	perror(str);
+	if (mlx->map_done)
+	{
+		ft_free_split(mlx->map_done);
+		ft_free_split(mlx->map.visited);
+	}
+	if (mlx->mlx)
+		free(mlx->mlx);
 	exit(0);
 }
-
-/*void	ft_end_map(t_program *mlx)
-{
-	if (mlx->won == 1)
-	{
-		while (mlx->y < mlx->map.winy)
-		{
-			while (mlx->map_done[mlx->y][mlx->x] != '\0')
-			{
-				ft_print_cell(mlx);
-				usleep(100);
-				mlx->x++;
-			}
-			mlx->x = 0;
-			mlx->y++;
-		}
-	}
-}*/

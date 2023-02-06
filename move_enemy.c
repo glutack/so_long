@@ -56,7 +56,9 @@ void	ft_move_enemy(t_program *mlx)
 			{
 				if (mlx->map_done[mlx->y][mlx->x - 1] != '1'
 						&& mlx->map_done[mlx->y][mlx->x - 1] != 'B')
+				{
 					ft_move_enemy_left(mlx);
+				}
 			}
 			else
 			{
@@ -65,6 +67,11 @@ void	ft_move_enemy(t_program *mlx)
 					ft_move_enemy_right(mlx);
 			}
 			mlx->x++;
+		}
+		if (mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
+		{
+			mlx->dead = 1;
+			ft_draw_end_map(mlx);
 		}
 		mlx->y++;
 		mlx->x = 0;

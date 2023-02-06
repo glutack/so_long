@@ -18,7 +18,7 @@ SRCS		= 	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c\
 				ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c\
 				ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c\
 				ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c\
-				ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c 
+				ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c ft_free_split.c
 OBJS		= 	${SRCS:.c=.o}
 SRCS_BONUS	=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
 				ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
@@ -31,17 +31,12 @@ all: $(NAME)
 
 %.o: %.c
 	@gcc ${CFLAGS} -c $< -o $@
-	@echo "libft -> objetos creados"
 
-$(NAME): ${OBJS} $(FT_PRINTF)
+$(NAME): ${OBJS} ${OBJS_BONUS} $(FT_PRINTF)
 	@make -C ./ft_printf
 	@gcc -c ${CFLAGS} ${SRCS}
-	@ar crs ${NAME} ${OBJS}
+	@ar crs ${NAME} ${OBJS} ${OBJS_BONUS}
 	@echo "libft -> creada"
-
-bonus: $(NAME) ${OBJS_BONUS}
-	@ar crs ${NAME} ${OBJS_BONUS}
-	@echo "libft -> bonus creado"
 
 clean: 
 	@make -C ./ft_printf clean

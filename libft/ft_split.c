@@ -31,7 +31,7 @@ static int	ft_count_strings(char const *s, char c)
 	return (num);
 }
 
-static char	**ft_free(char **ptr, unsigned int n)
+char	**ft_free(char **ptr, unsigned int n)
 {
 	unsigned int	i;
 

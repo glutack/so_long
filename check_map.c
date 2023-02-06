@@ -15,12 +15,12 @@ static void	ft_check_chars(char *str, int c, int *e, int *p, t_program *mlx)
 			(*p)++;
 		if (!(str[i] == '1' || str[i] == '0' || str[i] == 'C' || str[i] == 'E'
 				|| str[i] == 'P' || str[i] == 'B' || str[i] == '\n'))
-			ft_perror("Error\nIllegal char in map");
+			ft_perror("Error\nIllegal char in map", mlx);
 		i++;
 	}
 }
 
-static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
+static char	*ft_reading_map(char *map_read, char *map, int fd, t_program *mlx)
 {
 	int	e;
 	int	p;
@@ -29,16 +29,21 @@ static void	ft_reading_map(char *map_read, char **map, int fd, t_program *mlx)
 	p = 0;
 	mlx->to_collect = 0;
 	map_read = get_next_line(fd);
-	*map = "\0";
+	map = "\0";
 	while (map_read)
 	{
 		ft_check_chars(map_read, mlx->to_collect, &e, &p, mlx);
-		*map = ft_strjoin(*map, map_read);
+		map = ft_strjoin(map, map_read);
 		map_read = get_next_line(fd);
 		mlx->map.winy++;
 	}
+	while (map[mlx->map.winx] != '\n')
+		mlx->map.winx++;
+	if (mlx->map.winx == mlx->map.winy)
+		ft_perror("Error\nMap must be rectangular", mlx);
 	if ((mlx->to_collect < 1) || !(e == 1) || !(p == 1))
-		ft_perror("Error\nToo many or missing components");
+		ft_perror("Error\nToo many or missing components in map", mlx);
+	return (map);
 }
 
 static void	ft_get_positions(char **map, int y, t_program *mlx)
@@ -72,7 +77,7 @@ static void	ft_check_wall(char **map, t_program *mlx)
 	while (mlx->x >= 0)
 	{	
 		if ((map[mlx->y][mlx->x] != '1') || (map[0][mlx->x] != '1'))
-			ft_perror("Error\nMap is not closed");
+			ft_perror("Error\nMap is not closed", mlx);
 		else
 			mlx->x--;
 	}
@@ -81,7 +86,7 @@ static void	ft_check_wall(char **map, t_program *mlx)
 	while (mlx->y > 0)
 	{
 		if ((map[mlx->y][0] != '1') || (map[mlx->y][mlx->x] != '1'))
-			ft_perror("Error\nMap is not closed");
+			ft_perror("Error\nMap is not closed", mlx);
 		else
 			mlx->y--;
 	}
@@ -98,19 +103,16 @@ char	**ft_check_map(char *map, t_program *mlx)
 	mlx->map.winx = 0;
 	fd = open(map, O_RDONLY);
 	if (!fd)
-		ft_perror("Error\nRead error");
-	ft_reading_map(map_read, &map, fd, mlx);
-	while (map[mlx->map.winx] != '\n')
-		mlx->map.winx++;
-	if (mlx->map.winx == mlx->map.winy)
-		ft_perror("Error\nMap must be rectangular");
-	ft_init_var(mlx);
+		ft_perror("Error\nRead error", mlx);
+	map = ft_reading_map(map_read, map, fd, mlx);
+	close(fd);
 	map_done = ft_split(map, '\n');
 	mlx->map.visited = ft_split(map, '\n');
 	ft_check_wall(map_done, mlx);
 	if ((ft_check_path(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
-		ft_perror("Error\nNo path available");
+		ft_perror("Error\nNo path available", mlx);
+	ft_free_split(mlx->map.visited);
 	mlx->map.visited = ft_split(map, '\n');
-	close(fd);
+	free(map);
 	return (map_done);
 }

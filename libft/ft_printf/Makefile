@@ -21,7 +21,6 @@ all: $(NAME)
 
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o $@
-	@echo "ft_printf -> objetos creados"
 
 $(NAME): ${OBJS} 
 	@${CC} -c ${CFLAGS} ${SRCS}

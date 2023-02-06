@@ -107,12 +107,10 @@ int	ft_animation(void *program)
 	t_program	*mlx;
 
 	mlx = program;
-	if (mlx->dead || mlx->won == 1)
+	if (mlx->dead == 1 || mlx->won == 1)
 		return (1);
 	if (mlx->frame == 2999)
-	{
 		ft_animate_map(mlx);
-	}
 	if (mlx->eframe == 19999)
 		ft_move_enemy(mlx);
 	mlx->frame++;

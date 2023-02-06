@@ -3,9 +3,10 @@
 int	ft_close_win(t_program *mlx)
 {
 	ft_img_eraser(mlx);
+	ft_free_split(mlx->map.visited);
+	ft_free_split(mlx->map_done);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	free(mlx->mlx);
-	free(mlx->map_done);
 	exit(0);
 	return (0);
 }
@@ -18,7 +19,7 @@ void	ft_update_moves(t_program *mlx)
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
 		0 * 80, 0 * 80);
 	mlx_string_put(mlx->mlx, mlx->win, 25, 35, 000000, "moves");
-	mlx_string_put(mlx->mlx, mlx->win, 38, 50, 000000, ft_itoa(mlx->moves));
+	mlx_string_put(mlx->mlx, mlx->win, 38, 50, 000000, moves);
 	free(moves);
 }
 
@@ -56,6 +57,7 @@ int	ft_keys(int keycode, void *program)
 		ft_close_win(mlx);
 	if (mlx->won != 1 && mlx->dead != 1)
 	{
+		//ft_putstr_fd("%d", keycode);
 		if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
 		{
 			if (keycode == 13)
