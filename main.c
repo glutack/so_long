@@ -30,13 +30,10 @@ void	ft_init_var(t_program *mlx)
 	mlx->x = 0;
 }
 
-static void	ft_init_basics(t_program *mlx)
+static void	ft_init_game(t_program *mlx)
 {
 	ft_init_var(mlx);
 	ft_img_handler(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
-		mlx->x * 80, mlx->y * 80);
-	mlx->x = 1;
 	mlx->map.cptr = mlx->img.object;
 	mlx->map.exptr = mlx->img.exit0;
 	mlx->map.eptr = mlx->img.paulinol2;
@@ -56,17 +53,16 @@ static void	ft_init_basics(t_program *mlx)
 		mlx->y++;
 		mlx->x = 0;
 	}
-	ft_update_moves(mlx);
 }
 
-static void	ft_init_game(t_program *mlx)
+static void	ft_init_basics(t_program *mlx)
 {
 	if (!mlx->map_done)
 		ft_perror("Error\nCould not load map", mlx);
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		ft_perror("Error\nCould not initialize MLX", mlx);
-	mlx->win = mlx_new_window(mlx->mlx, mlx->map.winx * 80, mlx->map.winy * 80,
+	mlx->win = mlx_new_window(mlx->mlx, mlx->map.winx * SIZE, mlx->map.winy * SIZE,
 			"Las aventuras de Selene");
 	if (!mlx->win)
 		ft_perror("Error\nCould not open window", mlx);
@@ -84,8 +80,8 @@ void	main(int argc, char **argv)
 			mlx.collected = 0;
 			mlx.won = 0;
 			mlx.map_done = ft_check_map(argv[1], &mlx);
-			ft_init_game(&mlx);
 			ft_init_basics(&mlx);
+			ft_init_game(&mlx);
 			mlx_hook(mlx.win, 17, 0, ft_close_win, &mlx);
 			mlx_key_hook(mlx.win, ft_keys, &mlx);
 			mlx_loop_hook(mlx.mlx, ft_animation, &mlx);

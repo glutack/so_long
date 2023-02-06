@@ -80,23 +80,10 @@ static void	ft_animate_map(t_program *mlx)
 	ft_animate_obj(mlx);
 	ft_animate_exit(mlx);
 	ft_animate_enemy(mlx);
+	mlx->x = 1;
 	while (mlx->y < mlx->map.winy)
 	{
-		while (mlx->map_done[mlx->y][mlx->x] != '\0')
-		{
-			if (mlx->map_done[mlx->y][mlx->x] == 'C')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.cptr,
-					mlx->x * 80, mlx->y * 80);
-			else if (mlx->map_done[mlx->y][mlx->x] == 'E' && mlx->won == 0)
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
-					mlx->x * 80, mlx->y * 80);
-			else if (mlx->map_done[mlx->y][mlx->x] == 'B')
-			{
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
-					mlx->x * 80, mlx->y * 80);
-			}
-			mlx->x++;
-		}
+		ft_draw_map(mlx);
 		mlx->y++;
 		mlx->x = 0;
 	}

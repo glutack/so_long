@@ -8,6 +8,8 @@
 # include <fcntl.h> // open
 # include <unistd.h> // read, close, usleep
 
+# define SIZE 80
+
 
 //structs
 typedef struct s_img {
@@ -95,6 +97,7 @@ void	ft_move_right(t_program *mlx);
 //map
 char	**ft_check_map(char *map, t_program *mlx); //
 char	ft_check_path(char **map, int y, int x, t_program *mlx);
+void	ft_draw_p(t_program *mlx);
 void	ft_draw_map(t_program *mlx);
 void	ft_draw_end_map(t_program *mlx);
 void	ft_end_map(t_program *mlx);

@@ -2,56 +2,56 @@
 
 static void	ft_img_handlertwo(t_program *mlx)
 {
+	int	size;
+
+	size = SIZE;
+	(*mlx).img.path = mlx_xpm_file_to_image((*mlx).mlx,
+			"./textures/path.xpm", &size, &size);
 	(*mlx).img.selene = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/selene.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/selene.xpm", &size, &size);
 	(*mlx).img.selenel = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/selenel.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/selenel.xpm", &size, &size);
 	(*mlx).img.selener = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/selener.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/selener.xpm", &size, &size);
 	(*mlx).img.paulinol1 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/paulinol1.xpm", &((*mlx).img.width),
-			&((*mlx).img.height));
+			"./textures/paulinol1.xpm", &size, &size);
 	(*mlx).img.paulinol2 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/paulinol2.xpm", &((*mlx).img.width),
-			&((*mlx).img.height));
+			"./textures/paulinol2.xpm", &size, &size);
 	(*mlx).img.paulinol3 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/paulinol3.xpm", &((*mlx).img.width),
-			&((*mlx).img.height));
+			"./textures/paulinol3.xpm", &size, &size);
 	(*mlx).img.paulinor1 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/paulinor1.xpm", &((*mlx).img.width),
-			&((*mlx).img.height));
+			"./textures/paulinor1.xpm", &size, &size);
 	(*mlx).img.paulinor2 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/paulinor2.xpm", &((*mlx).img.width),
-			&((*mlx).img.height));
+			"./textures/paulinor2.xpm", &size, &size);
 	(*mlx).img.paulinor3 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/paulinor3.xpm", &((*mlx).img.width),
-			&((*mlx).img.height));
+			"./textures/paulinor3.xpm", &size, &size);
 }
 
 void	ft_img_handler(t_program *mlx)
 {
+	int	size;
+
+	size = SIZE;
 	(*mlx).img.wall = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/wall.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/wall.xpm", &size, &size);
 	(*mlx).img.moves = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/moves.xpm", &((*mlx).img.width), &((*mlx).img.height));
-	(*mlx).img.path = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/path.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/moves.xpm", &size, &size);
 	(*mlx).img.exit = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/exit.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/exit.xpm", &size, &size);
 	(*mlx).img.exit0 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/exit0.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/exit0.xpm", &size, &size);
 	(*mlx).img.exit40 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/exit40.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/exit40.xpm", &size, &size);
 	(*mlx).img.exit70 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/exit70.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/exit70.xpm", &size, &size);
 	(*mlx).img.object = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/object.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/object.xpm", &size, &size);
 	(*mlx).img.object0 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/object0.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/object0.xpm", &size, &size);
 	(*mlx).img.object40 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/object40.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/object40.xpm", &size, &size);
 	(*mlx).img.object70 = mlx_xpm_file_to_image((*mlx).mlx,
-			"./assets/object70.xpm", &((*mlx).img.width), &((*mlx).img.height));
+			"./textures/object70.xpm", &size, &size);
 	ft_img_handlertwo(mlx);
 	ft_img_error(mlx);
 }

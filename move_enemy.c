@@ -10,7 +10,7 @@ static void	ft_move_enemy_left(t_program *mlx)
 		{							
 			mlx->map_done[mlx->y][mlx->x] = '0';
 			mlx_put_image_to_window(mlx->mlx, mlx->win,
-				mlx->img.path, mlx->x * 80, mlx->y * 80);
+				mlx->img.path, mlx->x * SIZE, mlx->y * SIZE);
 		}
 		if (mlx->map.visited[mlx->y][mlx->x] == 'C')
 			mlx->map_done[mlx->y][mlx->x] = 'C';
@@ -24,7 +24,11 @@ static void	ft_move_enemy_right(t_program *mlx)
 	{
 		mlx->map_done[mlx->y][mlx->x] = '0';
 		mlx_put_image_to_window(mlx->mlx, mlx->win,
-			mlx->img.path, mlx->x * 80, mlx->y * 80);
+			mlx->img.path, mlx->x * SIZE, mlx->y * SIZE);
+		if (mlx->map.visited[mlx->y][mlx->x] == 'C')
+			mlx->map_done[mlx->y][mlx->x] = 'C';
+		if (mlx->map.visited[mlx->y][mlx->x] == 'E')
+			mlx->map_done[mlx->y][mlx->x] = 'E';
 		mlx->map_done[mlx->y][mlx->x + 1] = 'B';
 		mlx->x++;
 	}

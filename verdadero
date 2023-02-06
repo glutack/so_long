@@ -2,7 +2,6 @@
 
 void	ft_end_map(t_program *mlx)
 {
-	ft_init_var(mlx);
 	if (mlx->map_done[mlx->map.py][mlx->map.px] == 'E')
 	{
 		if (mlx->collected == mlx->to_collect)
@@ -33,6 +32,9 @@ void	ft_move_up(t_program *mlx)
 		}
 		mlx->map.py--;
 		mlx->moves++;
+		ft_putstr_fd("moves -> ", 1);
+		ft_putnbr_fd(mlx->moves, 1);
+		ft_putstr_fd("\n", 1);
 		ft_update_moves(mlx);
 		if (mlx->map_done[mlx->map.py][mlx->map.px] == 'E'
 				|| mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
@@ -53,6 +55,9 @@ void	ft_move_down(t_program *mlx)
 		}
 		mlx->map.py++;
 		mlx->moves++;
+		ft_putstr_fd("moves -> ", 1);
+		ft_putnbr_fd(mlx->moves, 1);
+		ft_putstr_fd("\n", 1);
 		ft_update_moves(mlx);
 		if (mlx->map_done[mlx->map.py][mlx->map.px] == 'E'
 				|| mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
@@ -73,6 +78,9 @@ void	ft_move_left(t_program *mlx)
 		}
 		mlx->map.px--;
 		mlx->moves++;
+		ft_putstr_fd("moves -> ", 1);
+		ft_putnbr_fd(mlx->moves, 1);
+		ft_putstr_fd("\n", 1);
 		ft_update_moves(mlx);
 		if (mlx->map_done[mlx->map.py][mlx->map.px] == 'E'
 				|| mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
@@ -93,6 +101,9 @@ void	ft_move_right(t_program *mlx)
 		}
 		mlx->map.px++;
 		mlx->moves++;
+		ft_putstr_fd("moves -> ", 1);
+		ft_putnbr_fd(mlx->moves, 1);
+		ft_putstr_fd("\n", 1);
 		ft_update_moves(mlx);
 		if (mlx->map_done[mlx->map.py][mlx->map.px] == 'E'
 				|| mlx->map_done[mlx->map.py][mlx->map.px] == 'B')
