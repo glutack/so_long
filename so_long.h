@@ -79,7 +79,7 @@ void	ft_move_enemy(t_program *mlx);
 void	ft_change_elap(t_program *mlx);
 
 //error
-void	ft_perror(char *str, t_program *mlx);
+int		ft_perror(char *str, t_program *mlx);
 void	ft_img_error(t_program *mlx);
 
 //keys

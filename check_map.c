@@ -20,10 +20,11 @@ static void	ft_check_chars(char *str, int *e, int *p, t_program *mlx)
 	}
 }
 
-static char	*ft_reading_map(char *map_read, char *map, int fd, t_program *mlx)
+static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 {
-	int	e;
-	int	p;
+	int		e;
+	int		p;
+	char	*map_read;
 
 	e = 0;
 	p = 0;
@@ -95,7 +96,6 @@ static void	ft_check_wall(char **map, t_program *mlx)
 
 char	**ft_check_map(char *map, t_program *mlx)
 {
-	char	*map_read;
 	char	**map_done;
 	int		fd;
 
@@ -104,7 +104,7 @@ char	**ft_check_map(char *map, t_program *mlx)
 	fd = open(map, O_RDONLY);
 	if (!fd)
 		ft_perror("Error\nRead error", mlx);
-	map = ft_reading_map(map_read, map, fd, mlx);
+	map = ft_reading_map(map, fd, mlx);
 	close(fd);
 	map_done = ft_split(map, '\n');
 	mlx->map.visited = ft_split(map, '\n');

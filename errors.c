@@ -14,7 +14,7 @@ void	ft_img_error(t_program *mlx)
 	}
 }
 
-void	ft_perror(char *str, t_program *mlx)
+int	ft_perror(char *str, t_program *mlx)
 {
 	perror(str);
 	if (mlx->map_done)
@@ -25,4 +25,5 @@ void	ft_perror(char *str, t_program *mlx)
 	if (mlx->mlx)
 		free(mlx->mlx);
 	exit(0);
+	return (0);
 }

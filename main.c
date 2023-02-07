@@ -68,7 +68,7 @@ static void	ft_init_basics(t_program *mlx)
 		ft_perror("Error\nCould not initialize window", mlx);
 }
 
-void	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_program	mlx;
 

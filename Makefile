@@ -9,7 +9,7 @@ LIBFT		=	./libft/libft.a
 LIBMLX		=	./minilibx-linux/libmlx_Linux.a
 
 #---------- other ----------#
-#CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 
 #---------- rules ----------#
