@@ -1,6 +1,6 @@
 #---------- ----------#
 NAME	=	so_long
-SRC		=	main.c images.c keys.c check_map.c move_player.c move_enemy.c errors.c map.c animation.c
+SRC		=	main.c images.c keys.c check_map.c player.c move_enemy.c errors.c map.c animation.c end_map.c
 OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#
@@ -9,7 +9,7 @@ LIBFT		=	./libft/libft.a
 LIBMLX		=	./minilibx-linux/libmlx_Linux.a
 
 #---------- other ----------#
-CFLAGS	=	-Wall -Wextra -Werror
+#CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 
 #---------- rules ----------#

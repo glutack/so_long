@@ -17,7 +17,9 @@ typedef struct s_img {
 	void	*selene;
 	void	*selenel;
 	void	*selener;
-	int		selenepos;
+	void	*you;
+	void	*win;
+	void	*lose;
 	void	*path;
 	void	*exit;
 	void	*exit0;
@@ -53,22 +55,22 @@ typedef struct s_map {
 }				t_map;
 
 typedef struct s_program {
-	void		*mlx;
-	void		*win;
-	char		**map_done;
-	int			y;
-	int			x;
-	int			falseyx;
-	int			moves;
-	int			collected;
-	int			to_collect;
-	int			won;
-	int			dead;
-	int			frame;
-	int			eframe;
+	void	*mlx;
+	void	*win;
+	char	**map_done;
+	int		selenepos;
+	int		y;
+	int		x;
+	int		moves;
+	int		collected;
+	int		to_collect;
+	int		won;
+	int		dead;
+	int		frame;
+	int		eframe;
 
-	t_img		img;
-	t_map		map;
+	t_img	img;
+	t_map	map;
 }				t_program;
 
 //image related
@@ -85,13 +87,13 @@ void	ft_img_error(t_program *mlx);
 //keys
 int		ft_close_win(t_program *mlx);
 int		ft_keys(int key, void *program);
-void	ft_move_updown(int m, t_program *mlx);
+void	ft_move_player(int movy, int movx, t_program *mlx);
 void	ft_move_leftright(int m, t_program *mlx);
 
 //map
 char	**ft_check_map(char *map, t_program *mlx);
 char	ft_check_path(char **map, int y, int x, t_program *mlx);
-void	ft_draw_player(t_program *mlx);
+void	ft_animate_player(int y, int x, t_program *mlx);
 void	ft_draw_map(t_program *mlx);
 void	ft_end_map(t_program *mlx);
 void	ft_draw_end_map(t_program *mlx);

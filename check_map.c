@@ -30,7 +30,7 @@ static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 	p = 0;
 	mlx->to_collect = 0;
 	map_read = get_next_line(fd);
-	map = "\0";
+	map = ft_strdup("\0");
 	while (map_read)
 	{
 		ft_check_chars(map_read, &e, &p, mlx);
@@ -38,6 +38,7 @@ static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 		map_read = get_next_line(fd);
 		mlx->map.winy++;
 	}
+	free(map_read);
 	while (map[mlx->map.winx] != '\n')
 		mlx->map.winx++;
 	if (mlx->map.winx == mlx->map.winy)
@@ -75,7 +76,6 @@ static void	ft_check_wall(char **map, t_program *mlx)
 {
 	mlx->x = (mlx->map.winx - 1);
 	mlx->y = (mlx->map.winy - 1);
-	
 	while (mlx->x >= 0)
 	{	
 		if ((map[mlx->y][mlx->x] != '1') || (map[0][mlx->x] != '1'))

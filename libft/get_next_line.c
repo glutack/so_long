@@ -114,6 +114,7 @@ static char	*ft_extract_line(char *save)
 		i++;
 	}
 	line[i] = '\0';
+	free(save);
 	return (line);
 }
 

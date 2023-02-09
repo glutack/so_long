@@ -77,9 +77,9 @@ static void	ft_animate_enemy(t_program *mlx)
 static void	ft_animate_map(t_program *mlx)
 {
 	ft_init_var(mlx);
+	ft_animate_enemy(mlx);
 	ft_animate_obj(mlx);
 	ft_animate_exit(mlx);
-	ft_animate_enemy(mlx);
 	mlx->x = 1;
 	while (mlx->y < mlx->map.winy)
 	{

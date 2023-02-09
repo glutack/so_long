@@ -23,7 +23,7 @@ int	ft_perror(char *str, t_program *mlx)
 		ft_free_split(mlx->map.visited);
 	}
 	if (mlx->mlx)
-		free(mlx->mlx);
+		mlx_destroy_display(mlx->mlx);
 	exit(0);
 	return (0);
 }

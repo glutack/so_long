@@ -37,12 +37,12 @@ static void	ft_init_game(t_program *mlx)
 	mlx->map.cptr = mlx->img.object;
 	mlx->map.exptr = mlx->img.exit0;
 	mlx->map.eptr = mlx->img.paulinol2;
-	mlx->img.selenepos = 0;
+	mlx->selenepos = 0;
 	mlx->moves = 0;
 	mlx->dead = 0;
 	mlx->collected = 0;
 	mlx->frame = 0;
-	mlx->eframe = 1;
+	mlx->eframe = 0;
 	mlx->map.clap = 0;
 	mlx->map.elap = 0;
 	mlx->map.exlap = 0;

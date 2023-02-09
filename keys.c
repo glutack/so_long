@@ -6,7 +6,7 @@ int	ft_close_win(t_program *mlx)
 	ft_free_split(mlx->map.visited);
 	ft_free_split(mlx->map_done);
 	mlx_destroy_window(mlx->mlx, mlx->win);
-	free(mlx->mlx);
+	mlx_destroy_display(mlx->mlx);
 	exit(0);
 	return (0);
 }
@@ -31,6 +31,7 @@ void	ft_update_moves(t_program *mlx)
 	mlx_string_put(mlx->mlx, mlx->win, 50, 66, 000000, tocollect);
 	free(moves);
 	free(collected);
+	free(tocollect);
 }
 
 int	ft_keys(int keycode, void *program)
@@ -57,13 +58,13 @@ int	ft_keys(int keycode, void *program)
 		if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100)
 		{
 			if (keycode == 119) //w
-				ft_move_updown((-1), program);
+				ft_move_player((-1), 0, program);
 			else if (keycode == 97) //a
-				ft_move_leftright((-1), program);
+				ft_move_player(0, (-1), program);
 			else if (keycode == 115) //s
-				ft_move_updown(1, program);
+				ft_move_player(1, 0, program);
 			else if (keycode == 100) //d
-				ft_move_leftright(1, program);
+				ft_move_player(0, 1, program);
 		}
 	}
 	return (0);

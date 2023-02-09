@@ -26,22 +26,6 @@ char	ft_check_path(char **map, int y, int x, t_program *mlx)
 	return ('F');
 }
 
-void	ft_draw_player(t_program *mlx)
-{
-	if (mlx->img.selenepos == 1)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selener,
-			mlx->map.px * 80, mlx->map.py * 80);
-		mlx->img.selenepos = 0;
-	}
-	else if (mlx->img.selenepos == 0)
-	{
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.selenel,
-			mlx->map.px * 80, mlx->map.py * 80);
-		mlx->img.selenepos = 1;
-	}
-}
-
 void	ft_draw_map(t_program *mlx)
 {
 	while (mlx->map_done[mlx->y][mlx->x] != '\0')
@@ -50,7 +34,7 @@ void	ft_draw_map(t_program *mlx)
 			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.wall,
 				mlx->x * 80, mlx->y * 80);
 		else if (mlx->y == mlx->map.py && mlx->x == mlx->map.px)
-			ft_draw_player(mlx);
+			ft_animate_player(mlx->y, mlx->x, mlx);
 		else if ((mlx->map_done[mlx->y][mlx->x] == '0'
 			|| mlx->map_done[mlx->y][mlx->x] == 'P'))
 			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.path,
@@ -58,34 +42,13 @@ void	ft_draw_map(t_program *mlx)
 		else if (mlx->map_done[mlx->y][mlx->x] == 'C')
 			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.cptr,
 				mlx->x * 80, mlx->y * 80);
-		else if (mlx->map_done[mlx->y][mlx->x] == 'E')
-			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
-				mlx->x * 80, mlx->y * 80);
 		else if (mlx->map_done[mlx->y][mlx->x] == 'B')
 			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.eptr,
 				mlx->x * 80, mlx->y * 80);
+		else if (mlx->map_done[mlx->y][mlx->x] == 'E')
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.exptr,
+				mlx->x * 80, mlx->y * 80);
 		ft_update_moves(mlx);
 		mlx->x++;
-	}
-}
-
-void	ft_draw_end_map(t_program *mlx)
-{
-	ft_init_var(mlx);
-	mlx->x = 1;
-	while (mlx->y < mlx->map.winy)
-	{
-		while (mlx->map_done[mlx->y][mlx->x] != '\0')
-		{
-			if (mlx->dead == 1)
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.paulinol1,
-					mlx->x * 80, mlx->y * 80);
-			else if (mlx->won == 1)
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.moves,
-					mlx->x * 80, mlx->y * 80);
-			mlx->x++;
-		}
-		mlx->y++;
-		mlx->x = 0;
 	}
 }

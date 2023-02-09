@@ -61,6 +61,12 @@ void	ft_img_handler(t_program *mlx)
 	(*mlx).img.selener = mlx_xpm_file_to_image((*mlx).mlx,
 			"./textures/selener.xpm", &((*mlx).img.width),
 			&((*mlx).img.height));
+	(*mlx).img.you = mlx_xpm_file_to_image((*mlx).mlx, "./textures/you.xpm",
+			&((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.win = mlx_xpm_file_to_image((*mlx).mlx, "./textures/win.xpm",
+			&((*mlx).img.width), &((*mlx).img.height));
+	(*mlx).img.lose = mlx_xpm_file_to_image((*mlx).mlx, "./textures/lose.xpm",
+			&((*mlx).img.width), &((*mlx).img.height));
 	ft_img_handler_enemy(mlx);
 	ft_img_handler_comp(mlx);
 	ft_img_error(mlx);
@@ -72,6 +78,9 @@ void	ft_img_eraser(t_program *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img.moves);
 	mlx_destroy_image(mlx->mlx, mlx->img.selene);
 	mlx_destroy_image(mlx->mlx, mlx->img.path);
+	mlx_destroy_image(mlx->mlx, mlx->img.you);
+	mlx_destroy_image(mlx->mlx, mlx->img.win);
+	mlx_destroy_image(mlx->mlx, mlx->img.lose);
 	mlx_destroy_image(mlx->mlx, mlx->img.exit);
 	mlx_destroy_image(mlx->mlx, mlx->img.exit0);
 	mlx_destroy_image(mlx->mlx, mlx->img.exit40);
