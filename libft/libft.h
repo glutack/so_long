@@ -116,7 +116,7 @@ char	**ft_split(char const *s1, char c);
 			/* 	RETURN -> reserva (malloc) un array de strings resultante de
 						separar s en substrings utilizando c como delimitador. 
 						Termina con	puntero NULL*/
-void	**ft_free_split(char **ptr);
+void	ft_free_split(char **ptr);
 char	*ft_itoa(int n);
 			/* 	RETURN -> utilizando malloc, genera str que represente valor int
 						recibido como argumento*/

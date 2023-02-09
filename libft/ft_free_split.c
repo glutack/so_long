@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	**ft_free_split(char **ptr)
+void	ft_free_split(char **ptr)
 {
 	unsigned int	i;
 	unsigned int	s;

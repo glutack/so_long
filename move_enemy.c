@@ -36,13 +36,13 @@ void	ft_move_enemy(t_program *mlx)
 {
 	while (mlx->map_done[mlx->y][mlx->x] != '\0')
 	{
-		if (mlx->map.elap == 0)
+		if (mlx->map.elap == 0 && mlx->x != 0)
 		{
 			if (mlx->map_done[mlx->y][mlx->x - 1] != '1'
 					&& mlx->map_done[mlx->y][mlx->x - 1] != 'B')
 				ft_place_enemy((-1), mlx);
 		}
-		else
+		else if (mlx->map.elap == 1 && mlx->x != mlx->map.winx - 1)
 		{
 			if (mlx->map_done[mlx->y][mlx->x + 1] != '1'
 					&& mlx->map_done[mlx->y][mlx->x + 1] != 'B')

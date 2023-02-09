@@ -63,8 +63,6 @@ static char	*ft_create_strings(char const *s, char c)
 		i++;
 	}
 	strings[i] = '\0';
-	if (s)
-		free(s);
 	return (strings);
 }
 

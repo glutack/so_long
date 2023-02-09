@@ -25,6 +25,7 @@ static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 	int		e;
 	int		p;
 	char	*map_read;
+	char	*aux;
 
 	e = 0;
 	p = 0;
@@ -34,11 +35,14 @@ static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 	while (map_read)
 	{
 		ft_check_chars(map_read, &e, &p, mlx);
+		aux = map;
 		map = ft_strjoin(map, map_read);
+		free(aux);
+		aux = map_read;
 		map_read = get_next_line(fd);
+		free(aux);
 		mlx->map.winy++;
 	}
-	free(map_read);
 	while (map[mlx->map.winx] != '\n')
 		mlx->map.winx++;
 	if (mlx->map.winx == mlx->map.winy)

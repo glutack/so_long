@@ -47,7 +47,7 @@ re: fclean all
 libclean:
 	@make -C ./minilibx-linux clean
 #@make -C ./mlx clean
-	@make -C ./libft clean
+	@make -C ./libft fclean
 	@echo "Objetos de las librerías eliminados :D"
 
 .PHONY: all clean fclean re
