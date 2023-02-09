@@ -88,8 +88,9 @@ int	main(int argc, char **argv)
 			mlx_loop(mlx.mlx);
 		}
 		else
-			ft_perror("Error\nMap format must be .ber", &mlx);
+			perror("Error\nMap format must be .ber");
 	}
 	else
-		ft_perror("Error\nIncorrect number of arguments", &mlx);
+		perror("Error\nIncorrect number of arguments");
+	return (0);
 }

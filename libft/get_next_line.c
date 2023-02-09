@@ -57,16 +57,10 @@ static char	*ft_gnlstrjoin(char *save, char *buff)
 	i = 0;
 	j = 0;
 	while (save[i] != '\0')
-	{
-		str[i] = save[i];
+		str[i++] = save[i];
 		i++;
-	}
 	while (buff[j] != '\0')
-	{	
-		str[i] = buff [j];
-		j++;
-		i++;
-	}
+		str[i++] = buff [j++];
 	str[ft_strlen(save) + ft_strlen(buff)] = '\0';
 	free(save);
 	return (str);
