@@ -49,16 +49,16 @@ static char	*ft_gnlstrjoin(char *save, char *buff)
 		save = (char *)malloc(1 * sizeof (char));
 		save[0] = '\0';
 	}
-	if (!save || !buff)
-		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(save) + ft_strlen(buff)) + 1));
-	if (str == NULL)
+	if (!save || !buff || str == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (save[i] != '\0')
-		str[i++] = save[i];
+	{
+		str[i] = save[i];
 		i++;
+	}
 	while (buff[j] != '\0')
 		str[i++] = buff [j++];
 	str[ft_strlen(save) + ft_strlen(buff)] = '\0';

@@ -6,7 +6,6 @@ int	ft_close_win(t_program *mlx)
 	ft_free_split(mlx->map.visited);
 	ft_free_split(mlx->map_done);
 	mlx_destroy_window(mlx->mlx, mlx->win);
-	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
 	exit(0);
 	return (0);
