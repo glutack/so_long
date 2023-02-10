@@ -1,28 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/10 12:23:11 by irmoreno          #+#    #+#             */
+/*   Updated: 2023/02/10 12:23:12 by irmoreno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-
-// AÑADIR FT_PRINTF A LIBFT Y CAMBIAR PRINTF
-
-static int	ft_check_ber(char *map)
-{
-	int	i;
-
-	i = ft_strlen(map) - 1;
-	if (map[i] == 'r')
-	{
-		i--;
-		if (map[i] == 'e')
-		{
-			i--;
-			if (map[i] == 'b')
-			{
-				i--;
-				if (map[i] == '.')
-					return (1);
-			}
-		}
-	}
-	return (0);
-}
 
 void	ft_init_var(t_program *mlx)
 {
@@ -58,14 +46,28 @@ static void	ft_init_game(t_program *mlx)
 static void	ft_init_basics(t_program *mlx)
 {
 	if (!mlx->map_done)
-		ft_perror("Error\nCould not load map", mlx);
+	{
+		perror("Error\nCould not load map");
+		exit(0);
+	}
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
-		ft_perror("Error\nCould not initialize MLX", mlx);
+	{
+		ft_free_split(mlx->map_done);
+		ft_free_split(mlx->map.visited);
+		perror("Error\nCould not initialize MLX");
+		exit(0);
+	}
 	mlx->win = mlx_new_window(mlx->mlx, mlx->map.winx * 80,
 			mlx->map.winy * 80, "Las aventuras de Selene");
 	if (!mlx->win)
-		ft_perror("Error\nCould not initialize window", mlx);
+	{
+		ft_free_split(mlx->map_done);
+		ft_free_split(mlx->map.visited);
+		free(mlx->mlx);
+		perror("Error\nCould not initialize window");
+		exit(0);
+	}
 }
 
 int	main(int argc, char **argv)

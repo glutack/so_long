@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/10 12:21:56 by irmoreno          #+#    #+#             */
+/*   Updated: 2023/02/10 12:21:58 by irmoreno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static int	ft_check_chars(char *str, int *e, int *p, t_program *mlx)
+static int	ft_check_chars(char *str, t_program *mlx)
 {
 	int	i;
 
@@ -10,9 +22,9 @@ static int	ft_check_chars(char *str, int *e, int *p, t_program *mlx)
 		if (str[i] == 'C')
 			mlx->to_collect++;
 		if (str[i] == 'E')
-			(*e)++;
+			mlx->map.ey++;
 		if (str[i] == 'P')
-			(*p)++;
+			mlx->map.ex++;
 		if (!(str[i] == '1' || str[i] == '0' || str[i] == 'C' || str[i] == 'E'
 				|| str[i] == 'P' || str[i] == 'B' || str[i] == '\n'))
 		{
@@ -25,13 +37,11 @@ static int	ft_check_chars(char *str, int *e, int *p, t_program *mlx)
 
 static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 {
-	int		e;
-	int		p;
 	char	*map_read;
 	char	*aux;
 
-	e = 0;
-	p = 0;
+	mlx->map.ey = 0;
+	mlx->map.ex = 0;
 	mlx->to_collect = 0;
 	map_read = get_next_line(fd);
 	map = ft_strdup("\0");
@@ -45,19 +55,11 @@ static char	*ft_reading_map(char *map, int fd, t_program *mlx)
 		free(aux);
 		mlx->map.winy++;
 	}
-	if (ft_check_chars(map, &e, &p, mlx) == 0)
-	{
-		free(map);
-		perror("Error\nIllegal char in map");
-		exit(0);
-	}
-	if ((mlx->to_collect < 1) || !(e == 1) || !(p == 1))
-	{
-		free(map_read);
-		free(map);
-		perror("Error\nToo many or missing components in map");
-		exit (0);
-	}
+	if (ft_check_chars(map, mlx) == 0)
+		ft_perror_reading_map(map, map_read, "Error\nIllegal char in map");
+	if ((mlx->to_collect < 1) || !(mlx->map.ey == 1) || !(mlx->map.ex == 1))
+		ft_perror_reading_map(map, map_read,
+			"Error\nToo many or missing components in map");
 	return (map);
 }
 
@@ -114,19 +116,6 @@ static int	ft_check_wall(char **map, t_program *mlx)
 	return (1);
 }
 
-static int	ft_check_fd(char *map)
-{
-	int fd;
-
-	fd = open(map, O_RDONLY);
-	if (!fd)
-	{
-		perror("Error\nRead error");
-		exit(0);
-	}
-	return (fd);
-}
-
 char	**ft_check_map(char *map, t_program *mlx)
 {
 	char	**map_done;
@@ -139,33 +128,16 @@ char	**ft_check_map(char *map, t_program *mlx)
 	while (map[mlx->map.winx] != '\n')
 		mlx->map.winx++;
 	if (mlx->map.winx == mlx->map.winy)
-	{
-		free(map);
-		close(fd);
-		perror("Error\nMap must be rectangular");
-		exit(0);
-	}
+		ft_perror_map_rectangular(map, fd, "Error\nMap must be rectangular");
 	close(fd);
 	map_done = ft_split(map, '\n');
 	mlx->map.visited = ft_split(map, '\n');
 	if (ft_check_wall(map_done, mlx) == 0)
-	{
-		free(map);
-		ft_free_split(map_done);
-		ft_free_split(mlx->map.visited);
-		perror("Error\nNo path available");
-		exit (0);
-	}
+		ft_perror_check(map, map_done, "Error\nMap is not closed", mlx);
 	else
 	{
 		if ((ft_check_path(map_done, mlx->map.py, mlx->map.px, mlx)) == 'F')
-		{
-			free(map);
-			ft_free_split(map_done);
-			ft_free_split(mlx->map.visited);
-			perror("Error\nNo path available");
-			exit (0);
-		}
+			ft_perror_check(map, map_done, "Error\nNo path available", mlx);
 		ft_free_split(mlx->map.visited);
 		mlx->map.visited = ft_split(map, '\n');
 	}
