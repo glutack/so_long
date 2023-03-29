@@ -5,7 +5,7 @@ In my case the game will be called **"Las aventuras de Selene"** *(The adventure
 
 <p align="center" size=""><img src="https://github.com/glutack/glutack/blob/master/42img/so_long/selenegif.gif?raw=true" alt="game main character"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/objectgif.gif?raw=true" alt="game collectibles"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/exitgif.gif?raw=true" alt="game exit"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/paulinogifnoback.gif?raw=true" alt="game enemy"/></p>
 
-<p align="center"><sub>Main character: Selene	|	Collectibles: chicken wings	|	Exit	|	Enemy: Paulina</sub></p>
+<p align="center"><sup>Main character: Selene	|	Collectibles: chicken wings	|	Exit	|	Enemy: Paulina</sup></p>
 
 ## Usage
 When cloned you'll only have to `make` and start the program as `./so_long [map]`. There's a few maps in folder `maps`.
