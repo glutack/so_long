@@ -9,6 +9,7 @@ In my case the game will be called "Las aventuras de Selene" *(The adventures of
 </figure>
 
 <p align="center"><img src="https://github.com/glutack/glutack/blob/master/42img/so_long/selenegif.gif?raw=true" alt="game main character"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/objectgif.gif?raw=true" alt="game collectibles"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/exitgif.gif?raw=true" alt="game exit"/>
+
 Main character: Selene	|	Game collectibles: chicken wings	|	Game exit</p>
 
 <img src="https://github.com/glutack/glutack/blob/master/42img/so_long/paulinogif.gif?raw=true" alt="game enemy"/>
