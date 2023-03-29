@@ -8,12 +8,12 @@ In my case the game will be called **"Las aventuras de Selene"** *(The adventure
 <p align="center">Main character: Selene	|	Collectibles: chicken wings	|	Exit	|	Enemy: Paulina</p>
 
 ## Usage
-When cloned you'll only have to `make` and start the program as `./so_long [map]`. There's a few maps in folder `maps`
+When cloned you'll only have to `make` and start the program as `./so_long [map]`. There's a few maps in folder `maps`.
 
 ### Library
 - As the MXL lib is different for MAC and LINUX, there's a few changes to be made in the `Makefile`, it saved to work with LINUX when cloned, if you want to use it for MAC, you must uncomment (#) the rules commented and comment the ones refering to LINUX. 
 <details>
-<summary>*The ones with # are for MAC*</summary>
+<summary>The ones with # are for MAC</summary>
 
 ```
 LIBMLX		=	./minilibx-linux/libmlx_Linux.a	
@@ -48,6 +48,7 @@ If any of these rules fails, the program won't work:
 - Must be in `.ber` format
 - Must be rectangular and all rows must have the same lenght
 - Must be closed
+- There must be a path available between the exit and the player
 
 ---
 ## to improve
