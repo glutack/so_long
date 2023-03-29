@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/glutack/glutack/blob/master/42img/so_long/so_long_banner.png?raw=true" alt="so_long 42 banner 125% 10/02/2023"/></p>
 
 The `so_long` project lets us code a classic 2D game with the MLX Library, where you have to get all the collectibles in the map in order to win.
-In my case the game will be called **"Las aventuras de Selene"** *(The adventures of Selene)*, a cute game where you're Selene (a hungry cute doggy) ready to eat all the chicken wings she can while trying to avoid Paulina, an evil chicken that will try to stab you.
+In my case the game will be called **"Las aventuras de Selene"** *(The adventures of Selene)*, a cute game where you're Selene (a hungry cute doggy) ready to eat all the chicken wings she can while trying to avoid Paulina, an evil chicken that will try to stab you <sup>(this game is kinda a joke, both are my pets irl)</sup>.
 
 <p align="center" size=""><img src="https://github.com/glutack/glutack/blob/master/42img/so_long/selenegif.gif?raw=true" alt="game main character"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/objectgif.gif?raw=true" alt="game collectibles"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/exitgif.gif?raw=true" alt="game exit"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/paulinogifnoback.gif?raw=true" alt="game enemy"/></p>
 
