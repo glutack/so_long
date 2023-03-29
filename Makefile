@@ -7,8 +7,8 @@ OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#
 LIBFT		=	./libft/libft.a
-#LIBMLX		=	./mlx/libmlx.a
 LIBMLX		=	./minilibx-linux/libmlx_Linux.a
+#LIBMLX		=	./mlx/libmlx.a
 
 #---------- other ----------#
 CFLAGS	=	-Wall -Wextra -Werror
@@ -22,8 +22,8 @@ $(LIBFT):
 	@make -C ./libft
 
 $(LIBMLX):
-#@make -C ./mlx
 	@make -C minilibx-linux
+#@make -C ./mlx
 
 %.o: %.c
 	@gcc -g $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
