@@ -9,31 +9,32 @@ In my case the game will be called **"Las aventuras de Selene"** *(The adventure
 
 ## Usage
 ### Library
-- As the MXL lib is different for MAC and LINUX, there's a few changes to be made in the `Makefile`, it saved to work with LINUX when cloned, if you want to use it for MAC, you must uncomment (#) the rules commented and comment the ones refering to LINUX
+- As the MXL lib is different for MAC and LINUX, there's a few changes to be made in the `Makefile`, it saved to work with LINUX when cloned, if you want to use it for MAC, you must uncomment (#) the rules commented and comment the ones refering to LINUX. 
+<summary>The ones with # are for MAC
 ```
-#LIBMLX		=	./mlx/libmlx.a					<- LINUX
-LIBMLX		=	./minilibx-linux/libmlx_Linux.a		<- MAC
+LIBMLX		=	./minilibx-linux/libmlx_Linux.a	
+#LIBMLX		=	./mlx/libmlx.a	
 ```
 ```
 $(LIBMLX):
-#@make -C ./mlx					<- LINUX
-	@make -C minilibx-linux		<-MAC
+	@make -C minilibx-linux
+#@make -C ./mlx	
 ```
 ```
 %.o: %.c
-	@gcc -g $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ 	<- LINUX
-#@gcc $(CFLAGS) -c $(SRC)	<- MAC
+	@gcc -g $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ 
+#@gcc $(CFLAGS) -c $(SRC)
 ```
 ```
 $(NAME): $(OBJ) $(LIBMLX) $(LIBFT)
-	@gcc -g $(CFLAGS) $(OBJ) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME) 	<-LINUX
-#@gcc $(OBJ) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)											<- MAC
+	@gcc -g $(CFLAGS) $(OBJ) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME)
+#@gcc $(OBJ) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 ```
 ```
 libclean:
-	@make -C ./minilibx-linux clean					<- LINUX
-#@make -C ./mlx clean								<- MAC
-```
+	@make -C ./minilibx-linux clean
+#@make -C ./mlx clean
+```</summary>
 
 
 ### Map
