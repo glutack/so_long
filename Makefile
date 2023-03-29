@@ -1,6 +1,8 @@
 #---------- ----------#
 NAME	=	so_long
-SRC		=	main.c images.c keys.c check_map.c player.c check_other.c move_enemy.c errors.c map.c animation.c
+SRC		=	./src/main.c ./src/images.c ./src/keys.c ./src/check_map.c\
+			./src/player.c ./src/check_other.c ./src/move_enemy.c\
+			./src/errors.c ./src/map.c ./src/animation.c
 OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#
@@ -28,7 +30,6 @@ $(LIBMLX):
 #@gcc $(CFLAGS) -c $(SRC)
 	@echo "Objetos creados :D"
 
-#To link with the required internal Linux API:#
 $(NAME): $(OBJ) $(LIBMLX) $(LIBFT)
 	@gcc -g $(CFLAGS) $(OBJ) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME)
 #@gcc $(OBJ) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
@@ -50,4 +51,4 @@ libclean:
 	@make -C ./libft fclean
 	@echo "Objetos de las librerías eliminados :D"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libclean
