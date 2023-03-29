@@ -3,16 +3,12 @@
 The `so_long` project lets us code a classic 2D game with the MLX Library where you have to get all the collectibles in the map to be able to win.
 In my case the game will be called "Las aventuras de Selene" *(The adventures of Selene)*, a cute game where you're Selene (a hungry cute doggy) ready to eat all the chicken wings she can while trying to avoid Paulina, an evil chicken that will try to stab you.
 
-<figure>
-  <img src="https://github.com/glutack/glutack/blob/master/42img/so_long/selenegif.gif?raw=true" alt="game main character" alt="my img"/>
-  <figcaption> Your text </figcaption>
-</figure>
 
-<p align="center"><img src="https://github.com/glutack/glutack/blob/master/42img/so_long/selenegif.gif?raw=true" alt="game main character"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/objectgif.gif?raw=true" alt="game collectibles"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/exitgif.gif?raw=true" alt="game exit"/>
+<p align="center"><img src="https://github.com/glutack/glutack/blob/master/42img/so_long/selenegif.gif?raw=true" alt="game main character"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/objectgif.gif?raw=true" alt="game collectibles"/>	<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/exitgif.gif?raw=true" alt="game exit"/></p>
 
-Main character: Selene	|	Game collectibles: chicken wings	|	Game exit</p>
+<p align="center">Main character: Selene	|	Game collectibles: chicken wings	|	Game exit</p>
 
-<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/paulinogif.gif?raw=true" alt="game enemy"/>
+<img src="https://github.com/glutack/glutack/blob/master/42img/so_long/paulinogifnoback.gif?raw=true" alt="game enemy"/>
 
 
 
