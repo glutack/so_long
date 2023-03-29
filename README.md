@@ -12,6 +12,7 @@ In my case the game will be called **"Las aventuras de Selene"** *(The adventure
 - As the MXL lib is different for MAC and LINUX, there's a few changes to be made in the `Makefile`, it saved to work with LINUX when cloned, if you want to use it for MAC, you must uncomment (#) the rules commented and comment the ones refering to LINUX. 
 <details>
 <summary>The ones with # are for MAC</summary>
+
 ```
 LIBMLX		=	./minilibx-linux/libmlx_Linux.a	
 #LIBMLX		=	./mlx/libmlx.a	
